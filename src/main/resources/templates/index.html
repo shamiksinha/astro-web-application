@@ -1,0 +1,1246 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+
+<head>
+    <!-- Theme Made By www.w3schools.com - No Copyright -->
+    <title>SD Theme</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link href="css/default.css" th:href="@{/css/default.css}" rel="stylesheet" media="screen" />
+    <link href="http://cdn.jsdelivr.net/webjars/bootstrap/3.4.0/css/bootstrap.min.css"
+        th:href="@{/webjars/bootstrap/3.4.0/css/bootstrap.min.css}" rel="stylesheet" media="screen" />
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.8.1/css/font-awesome.min.css"
+        th:href="@{/webjars/font-awesome/5.8.1/css/fontawesome.min.css}" rel="stylesheet" media="screen">
+
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.8.1/css/brands.min.css"
+        th:href="@{/webjars/font-awesome/5.8.1/css/brands.min.css}" rel="stylesheet" media="screen">
+
+    <link href="css/tempusdominus-bootstrap-3.min.css" th:href="@{/css/tempusdominus-bootstrap-3.min.css}"
+        rel="stylesheet" media="screen" />
+
+    <!-- <link
+	href="http://cdn.jsdelivr.net/webjars/bootstrap-datetimepicker/2.4.2/css/bootstrap-datetimepicker.min.css"
+	th:href="@{/webjars/bootstrap-datetimepicker/2.4.2/css/bootstrap-datetimepicker.min.css}"
+	rel="stylesheet" media="screen" /> -->
+    <!-- <link
+	href="https://cdnjs.cloudflare.com/ajax/libs/eonasdan-bootstrap-datetimepicker/4.17.47/css/bootstrap-datetimepicker.min.css"
+	th:href="@{/webjars/Eonasdan-bootstrap-datetimepicker/4.17.47/css/bootstrap-datetimepicker.min.css}"
+	rel="stylesheet" media="screen" /> -->
+    <style>
+        body {
+            font: 400 15px/1.8 Lato, sans-serif;
+            color: #777;
+        }
+
+        h3,
+        h4 {
+            margin: 10px 0 30px 0;
+            letter-spacing: 10px;
+            font-size: 20px;
+            color: #111;
+        }
+
+        .container {
+            padding-top: 60px;
+            padding-right: 60px;
+            padding-left: 60px;
+            padding-bottom: 60px;
+        }
+
+        .person {
+            border: 10px solid transparent;
+            margin-bottom: 25px;
+            /*    width: 80%;
+    height: 80%;*/
+            opacity: 0.7;
+        }
+
+        .person:hover {
+            border-color: #999;
+        }
+
+        .carousel-inner img {
+            -webkit-filter: grayscale(70%);
+            filter: grayscale(70%);
+            /* make all photos black and white */
+            width: 100%;
+            /* Set width to 100% */
+            margin: auto;
+        }
+
+        .carousel-caption h3 {
+            color: #fff !important;
+        }
+
+        @media (max-width : 600px) {
+            .carousel-caption {
+                display: none;
+                /* Hide the carousel text when the screen is less than 600 pixels wide */
+            }
+        }
+
+        .bg-1 {
+            background: #2d2d30;
+            color: #bdbdbd;
+        }
+
+        .bg-1 h3 {
+            color: #fff;
+        }
+
+        .bg-1 p {
+            font-style: italic;
+        }
+
+        .list-group-item:first-child {
+            border-top-right-radius: 0;
+            border-top-left-radius: 0;
+        }
+
+        .list-group-item:last-child {
+            border-bottom-right-radius: 0;
+            border-bottom-left-radius: 0;
+        }
+
+        .thumbnail {
+            padding: 0 0 15px 0;
+            border: none;
+            border-radius: 0;
+        }
+
+        .thumbnail p {
+            margin-top: 15px;
+            color: #555;
+        }
+
+        .btn {
+            padding: 10px 20px;
+            background-color: #333;
+            color: #f1f1f1;
+            border-radius: 0;
+            transition: .2s;
+        }
+
+        .btn:hover,
+        .btn:focus {
+            border: 1px solid #333;
+            background-color: #fff;
+            color: #000;
+        }
+
+        .modal-header,
+        h4,
+        .close {
+            background-color: #333;
+            color: #fff !important;
+            text-align: center;
+            font-size: 30px;
+        }
+
+        .modal-header,
+        .modal-body {
+            padding: 40px 50px;
+        }
+
+        .nav-tabs li a {
+            color: #777;
+        }
+
+        #googleMap {
+            width: 100%;
+            height: 400px;
+            -webkit-filter: grayscale(100%);
+            filter: grayscale(100%);
+        }
+
+        .navbar {
+            font-family: Montserrat, sans-serif;
+            margin-bottom: 0;
+            background-color: #2d2d30;
+            border: 0;
+            font-size: 11px !important;
+            letter-spacing: 4px;
+            opacity: 0.9;
+        }
+
+        .navbar li a,
+        .navbar .navbar-brand {
+            color: #d5d5d5 !important;
+        }
+
+        .navbar-nav li a:hover {
+            color: #fff !important;
+        }
+
+        .navbar-nav li.active a {
+            color: #fff !important;
+            background-color: #29292c !important;
+        }
+
+        .navbar-default .navbar-toggle {
+            border-color: transparent;
+        }
+
+        .open .dropdown-toggle {
+            color: #fff;
+            background-color: #555 !important;
+        }
+
+        .dropdown-menu li a {
+            color: #000 !important;
+        }
+
+        .dropdown-menu li a:hover {
+            background-color: red !important;
+        }
+
+        footer {
+            background-color: #2d2d30;
+            color: #f5f5f5;
+            padding: 32px;
+        }
+
+        footer a {
+            color: #f5f5f5;
+        }
+
+        footer a:hover {
+            color: #777;
+            text-decoration: none;
+        }
+
+        .form-control {
+            border-radius: 0;
+        }
+
+        textarea {
+            resize: none;
+        }
+
+        /* 
+        .button2 {
+            border-radius: 4px;
+        } */
+
+
+        .btn1 {
+            padding: 10px 20px;
+            background-color: #333;
+            color: #F00;
+            border-radius: 0;
+            transition: .2s;
+        }
+
+        .thumbnail1 {
+            padding: 0 0 15px 0;
+            border: none;
+            border-radius: 0;
+        }
+
+        #login .container #login-row #login-column #login-box {
+            margin-top: 120px;
+            max-width: 600px;
+            height: 320px;
+            border: 1px solid #9C9C9C;
+            background-color: #EAEAEA;
+        }
+
+        #login .container #login-row #login-column #login-box #login-form {
+            padding: 20px;
+        }
+
+        #login .container #login-row #login-column #login-box #login-form #register-link {
+            margin-top: -85px;
+        }
+
+        #rashi .container #rashi-row #rashi-column #rashi-box {
+            margin-top: 120px;
+            max-width: 600px;
+            height: 320px;
+            border: 1px solid #9C9C9C;
+            background-color: #EAEAEA;
+        }
+
+        #rashi .container #rashi-row #rashi-column #rashi-box #rashi-form {
+            padding: 20px;
+        }
+
+        #rashi .container #rashi-row #rashi-column #rashi-box #rashi-form #register-link {
+            margin-top: -85px;
+        }
+
+        .icon-bar {
+            position: fixed;
+            top: 50%;
+            -webkit-transform: translateY(-50%);
+            -ms-transform: translateY(-50%);
+            transform: translateY(-50%);
+        }
+
+        .icon-bar a {
+            display: block;
+            text-align: center;
+            padding: 16px;
+            transition: all 0.3s ease;
+            color: white;
+            font-size: 20px;
+        }
+
+        .icon-bar a:hover {
+            background-color: #000;
+        }
+
+        .facebook {
+            background: #3B5998;
+            color: white;
+        }
+
+        .twitter {
+            background: #55ACEE;
+            color: white;
+        }
+
+        .google {
+            background: #dd4b39;
+            color: white;
+        }
+
+        .linkedin {
+            background: #007bb5;
+            color: white;
+        }
+
+        .youtube {
+            background: #bb0000;
+            color: white;
+        }
+    </style>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"
+        th:src="@{/webjars/jquery/3.3.1/jquery.min.js}"></script>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.24.0/moment.min.js"
+        th:src="@{/webjars/momentjs/2.24.0/min/moment.min.js}"></script>
+
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/js/bootstrap.min.js"
+        th:src="@{/webjars/bootstrap/3.4.0/js/bootstrap.min.js}"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.form/4.2.2/jquery.form.min.js"
+        integrity="sha384-FzT3vTVGXqf7wRfy8k4BiyzvbNfeYjK+frTVqZeNDFl8woCbF0CYG6g2fMEFFo/i" crossorigin="anonymous"
+        th:src="@{/webjars/jquery-form/4.2.2/jquery.form.min.js}"></script>
+    <!-- <script
+	src="https://maxcdn.bootstrapcdn.com/bootstrap-datetimepicker/2.4.2/js/bootstrap-datetimepicker.min.js"
+	th:src="@{/webjars/bootstrap-datetimepicker/2.4.2/js/bootstrap-datetimepicker.min.js}"></script> -->
+    <!-- <script
+	src="https://cdnjs.cloudflare.com/ajax/libs/eonasdan-bootstrap-datetimepicker/4.17.47/js/bootstrap-datetimepicker.min.js"
+	th:src="@{/webjars/Eonasdan-bootstrap-datetimepicker/4.17.47/js/bootstrap-datetimepicker.min.js}"></script> -->
+
+    <script type="text/javascript" src="js/tempusdominus-core.js" th:src="@{/js/tempusdominus-core.js}"></script>
+    <script type="text/javascript" src="js/tempusdominus-bootstrap-3.min.js"
+        th:src="@{/js/tempusdominus-bootstrap-3.min.js}"></script>
+
+    <script type="text/javascript" src="/js/functions.js" th:src="@{/js/functions.js}"></script>
+
+
+</head>
+
+<body id="myPage" data-spy="scroll" data-target=".navbar" data-offset="50">
+	<audio autoplay loop>
+		<source src="audio/mahalakshmi-mantra.mp3" type="audio/mpeg">
+		Your browser does not support the audio tag.
+	</audio> 
+
+    <nav class="navbar navbar-default navbar-fixed-top">
+        <div class="container-fluid">
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#myNavbar">
+                    <span class="icon-bar"></span> <span class="icon-bar"></span> <span class="icon-bar"></span>
+                </button>
+                <a class="navbar-brand" href="#myPage">Somnath Bhattachariya </a>
+            </div>
+            <div class="collapse navbar-collapse" id="myNavbar">
+                <ul class="nav navbar-nav navbar-right">
+                    <li><a href="#myPage">HOME</a></li>
+                    <li><a href="#Services">SERVICES</a></li>
+                    <li><a href="#product">PRODUCT</a></li>
+                    <li><a href="#memberLogin">MEMBER LOGIN</a></li>
+                    <li><a href="#contact">CONTACT</a></li>
+                    <li class="dropdown"><a class="dropdown-toggle" data-toggle="dropdown" href="#">MORE <span
+                                class="caret"></span></a>
+                        <ul class="dropdown-menu">
+                            <li><a href="#Updates">Current Setuation</a></li>
+                            <li><a href="#DateVisit">Visiting Date</a></li>
+                            <li><a href="#Feedback">Feedbaack</a></li>
+                            <li><a href="#" data-toggle="modal" data-target="#familytree">Family Tree</a></li>
+                        </ul>
+                    </li>
+                    <li><a href="#"><span class="glyphicon glyphicon-search"></span></a></li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+    <!-- Wrapper carousel -->
+    <div th:replace="fragments/family-tree.html :: familytreemodal"></div>
+    <div class="icon-bar">
+        <a href="https://www.facebook.com/somnath.bhattacharjee.1656" class="facebook"><i
+                class="fab fa-facebook-f"></i></a>
+        <!--  <a href="https://www.twitter.com/" class="twitter"><i class="fa fa-twitter"></i></a> 
+  <a href="https://www.google.com" class="google"><i class="fa fa-google"></i></a> -->
+        <a href="https://www.instagram.com/somnath3162/" class="linkedin"><i class="fab fa-linkedin"></i></a> <a
+            href="https://www.youtube.com/channel/UCJRfCPlqirM00Bh04g-SJpQ" class="youtube"><i
+                class="fab fa-youtube"></i></a>
+    </div>
+    <div class="container">
+        <h2>Survive from Monetary Problem</h2>
+        <div id="myCarousel" class="carousel slide" data-ride="carousel">
+            <!-- Indicators -->
+            <ol class="carousel-indicators">
+                <li data-target="#myCarousel" data-slide-to="0" class="active"></li>
+                <li data-target="#myCarousel" data-slide-to="1"></li>
+                <li data-target="#myCarousel" data-slide-to="2"></li>
+            </ol>
+
+            <!-- Wrapper for slides -->
+            <div class="carousel-inner">
+                <div class="item active">
+                    <img src="img/backgrounds-galaxy-001.png" alt="Los Angeles" style="width: 100%;">
+                    <h1>
+                        <span>"We Understand and Manage your Anxiety, Helplessness,
+                            Stress and Loneliness"</span>
+                    </h1>
+                </div>
+
+                <div class="item">
+                    <img src="img/backgrounds-galaxy-002.png" alt="Los Angeles" style="width: 100%;">
+                    <h1>
+                        <span>“Come be a member of our Soubhagya Shree Pariwar To
+                            overcome Financial Crisis”</span>
+                    </h1>
+                </div>
+
+                <div class="item">
+                    <img src="img/backgrounds-galaxy-03.png" alt="Los Angeles" style="width: 100%;">
+                    <h1>
+                        <span>"Acharya Somnath Bhattacharya’s valuable suggestions
+                            will transform your Business Prosperity"</span>
+                    </h1>
+                </div>
+            </div>
+
+            <!-- Left and right controls -->
+            <a class="left carousel-control" href="#myCarousel" data-slide="prev">
+                <span class="glyphicon glyphicon-chevron-left"></span> <span class="sr-only">Previous</span>
+            </a> <a class="right carousel-control" href="#myCarousel" data-slide="next"> <span
+                    class="glyphicon glyphicon-chevron-right"></span> <span class="sr-only">Next</span>
+            </a>
+        </div>
+    </div>
+    <div class="container">
+        <h3>History of the Temple and Introduction of Dynasty</h3>
+        <p>
+            When Shri Panchanan Tarkalankar was arrived from Mithila to Tribeni
+            Snagam in the estimated year of 1785, since then the journey of this
+            dynasty began. The idol of the temple was shifted from Mithila to
+            Tribeni Snagam. From then onwards the lineage of this dynasty was
+            blessed by the almighty and the temple was fully enlightened. Shri
+            Panchanan Tarkalankar’s son Shri Ramkishore Tarkalankar and his son
+            Ramkrishan Nayratna shifted from Tribeni Sangam to Chandan Nagar. The
+            idol of the temple was also shifted and established the temple in
+            Chandan Nagar. The present temple and the house was established by
+            Shri Panchanan Bhattacharya and his son Ram Ram Bhattacharya.<br>
+            In the year 1915 Shri Baulchand Bharracharya and Pranchor
+            Bhattacharya established the “Soubhagya Dishari Protisthan”. Shri
+            Bojoy Chandra Bhattacharya’s son Shri Anadi Nath Bhattacharya got the
+            dream from the divine goddess to spread the “Soubhagya Dishari
+            Protisthan” in and around the country. Shri Somnath Bhattacharya’s
+            relentless effort and tireless labour has helped him to spread the
+            blessings of the divine goddess Mahalakshmi in the country and
+            abroad. To fulfil his father’s desire Shri Somnath Bhattacharya
+            started maintaining the lineage of his ancestors he gave priority to
+            the services for human being those are suffering from severe
+            financial problem. He established several branches of this temple and
+            offering this holy service for the financial stability and prosperity
+            of business of the mankind.
+        </p>
+    </div>
+
+    <!--Login section-->
+    <div class="container" id="memberLogin" sec:authorize="isAnonymous()">
+        <div align="right">
+            <h3>MEMBER LOGIN</h3>
+            <!-- Trigger the modal with a button -->
+            <button type="button" class="btn btn-info btn-sm button" data-toggle="modal"
+                data-target="#LogInModal">LOGIN</button>
+        </div>
+
+        <!-- Modal -->
+        <div class="modal fade" id="LogInModal" role="dialog">
+            <div class="modal-dialog modal-md">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal">&times;</button>
+                        <h4 class="modal-title">Login</h4>
+                    </div>
+                    <div class="modal-body">
+                        <!--<p>This is a large modal.</p>-->
+                        <div id="login">
+                            <div class="container">
+                                <div id="login-row" class="row justify-content-center align-items-center">
+                                    <div id="login-column" class="col-md-6">
+                                        <div id="login-box" class="col-md-10">
+                                            <form id="login-form" class="form" action="#" method="post"
+                                                th:action="@{/index}">
+                                                <!-- <input type="hidden" th:name="${_csrf.parameterName}" th:value="${_csrf.token}" /> -->
+                                                <div class="form-group">
+                                                    <label for="username" class="text-info">Username:</label><br>
+                                                    <input type="text" name="username" id="username"
+                                                        class="form-control">
+                                                </div>
+                                                <div class="form-group">
+                                                    <label for="password" class="text-info">Password:</label><br>
+                                                    <input type="password" name="password" id="password"
+                                                        class="form-control">
+                                                </div>
+                                                <div class="form-group">
+                                                    <label for="remember-me" class="text-info"><span>Remember
+                                                            me</span> <span><input id="remember-me" name="remember-me"
+                                                                type="checkbox"></span></label><br> <input type="submit"
+                                                        name="submit" class="btn btn-info btn-md" value="submit">
+                                                </div>
+                                                <div id="register-link" class="text-right">
+                                                    <a href="#" class="text-info" data-source="login-row"
+                                                        data-target="regstr-row">Register here</a>
+                                                </div>
+                                            </form>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div id="regstr-row" class="row justify-content-center align-items-center"
+                                    style="display: none">
+                                    <div id="regstr-column" class="col-md-6">
+                                        <div id="regstr-box" class="col-md-10">
+                                            <form id="regstr-form" class="form" action="#" method="post"
+                                                th:action="@{/register}" th:object="${user}">
+                                                <div class="form-group">
+                                                    <label for="firstname" class="text-info">First
+                                                        Name:</label><br> <input type="text" class="form-control"
+                                                        th:field="*{firstName}">
+                                                </div>
+                                                <div class="form-group">
+                                                    <label for="lstname" class="text-info">Last Name:</label><br>
+                                                    <input type="text" class="form-control" th:field="*{lastName}">
+                                                </div>
+                                                <div class="form-group">
+                                                    <label for="mobile" class="text-info">Mobile:</label><br>
+                                                    <input type="text" class="form-control" th:field="*{phone}">
+                                                </div>
+                                                <div class="form-group">
+                                                    <label for="username" class="text-info">Username:</label><br>
+                                                    <input type="text" class="form-control" th:field="*{username}">
+                                                </div>
+                                                <div class="form-group">
+                                                    <label for="password" class="text-info">Password:</label><br>
+                                                    <input type="text" class="form-control" th:field="*{password}">
+                                                </div>
+                                                <div class="form-group">
+                                                    <label for="password" class="text-info">Confirm
+                                                        Password:</label><br> <input type="text" class="form-control"
+                                                        th:field="*{confirmPassword}">
+                                                </div>
+                                                <div id="login-link" class="text-right">
+                                                    <a href="#" class="text-info" data-source="regstr-row"
+                                                        data-target="login-row">Login</a>
+                                                </div>
+                                                <div class="form-group">
+                                                    <br> <input type="submit" name="Register"
+                                                        class="btn btn-info btn-md" value="Register">
+                                                </div>
+                                            </form>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!--Login-End-->
+
+    <div class="container" id="memberProfile" sec:authorize="hasAuthority('USER')">
+        <div align="right">
+            <h3>MEMBER PROFILE</h3>
+            <!-- Trigger the modal with a button -->
+            <div class="welcome">
+                <span sec:authorize="isAuthenticated()">Welcome <span sec:authentication="principal.firstName"></span>
+                    <span sec:authentication="principal.lastName"></span>
+                </span>
+            </div>
+            <button type="button" class="btn btn-info btn-sm button">PROFILE</button>
+        </div>
+    </div>
+
+    <!-- Container (The current status Section) -->
+
+
+    <div id="Updates" class="container text-center">
+        <h3>CURRENT SETUATION</h3>
+        <p>
+            <em>Your Monthly Horoscope</em>
+        </p>
+        <p>Your horoscope is the mirror to your life’s past, present and
+            future. It helps decipher challenges, unlock opportunities and
+            unravel mysteries that is blocking your way to moneytory success and
+            peace. These horoscopes prepared by India’s finest and learned
+            Astrologer Somnath Bhattachariya, ensures honest all-round guidance
+            on a daily, weekly, monthly and yearly basis. Know your Horoscope to
+            be aware of the extraterrestrial alignments.</p>
+        <br>
+        <div class="row">
+            <div class="col-sm-3">
+                <p class="text-center">
+                    <strong>Mesh</strong>
+                </p>
+                <br> <a href="#" data-toggle="modal" data-target="#rashiModal" data-name="mesh"> <img
+                        src="img/Rashi_0000.png" class="img-circle person" alt="Random Name" width="145" height="145">
+                </a>
+                <!-- <div id="demo" class="collapse">
+					<p>Mesh Rashi</p>
+					<button type="button" class="btn btn-info btn-sm button"
+						data-toggle="modal" data-target="#rashiModal">Click here</button>
+				</div> -->
+                <p>Contact: 8335824563 &amp; 8582973401</p>
+            </div>
+            <div class="col-sm-3">
+                <p class="text-center">
+                    <strong>Brisho</strong>
+                </p>
+                <br> <a href="#" data-toggle="modal" data-target="#rashiModal" data-name="brisha"> <img
+                        src="img/Rashi_0001.png" class="img-circle person" alt="Random Name" width="145" height="145">
+                </a>
+                <!-- <div id="demo2" class="collapse">
+					<p>Brisho</p>
+					<button type="button" class="btn btn-info btn-sm button"
+						data-toggle="modal" data-target="#rashiModal">Click here</button>
+				</div> -->
+                <p>Contact: 8335824563 &amp; 8582973401</p>
+            </div>
+            <div class="col-sm-3">
+                <p class="text-center">
+                    <strong>Mithun</strong>
+                </p>
+                <br> <a href="#" data-toggle="modal" data-target="#rashiModal" data-name="mithun"> <img
+                        src="img/Rashi_0002.png" class="img-circle person" alt="Random Name" width="145" height="145">
+                </a>
+                <!-- <div id="demo3" class="collapse">
+					<p>Mithun</p>
+					<button type="button" class="btn btn-info btn-sm button"
+						data-toggle="modal" data-target="#rashiModal">Click here</button>
+				</div> -->
+                <p>Contact: 8335824563 &amp; 8582973401</p>
+            </div>
+
+            <div class="col-sm-3">
+                <p class="text-center">
+                    <strong>Karkat</strong>
+                </p>
+                <br> <a href="#" data-toggle="modal" data-target="#rashiModal" data-name="karkat"> <img
+                        src="img/Rashi_0003.png" class="img-circle person" alt="Random Name" width="145" height="145">
+                </a>
+                <!-- <div id="demo4" class="collapse">
+					<p>Mithun</p>
+					<button type="button" class="btn btn-info btn-sm button"
+						data-toggle="modal" data-target="#rashiModal">Click here</button>
+				</div> -->
+                <p>Contact: 8335824563 &amp; 8582973401</p>
+            </div>
+            <div class="col-sm-3">
+                <p class="text-center">
+                    <strong>Shingha</strong>
+                </p>
+                <br> <a href="#" data-name="singha" data-toggle="modal" data-target="#rashiModal"> <img
+                        src="img/Rashi_0004.png" class="img-circle person" alt="Random Name" width="145" height="145">
+                </a>
+                <!-- <div id="demo5" class="collapse">
+					<p>Shingha</p>
+					<button type="button" class="btn btn-info btn-sm button"
+						data-toggle="modal" data-target="#rashiModal">Click here</button>
+				</div> -->
+                <p>Contact: 8335824563 &amp; 8582973401</p>
+            </div>
+            <div class="col-sm-3">
+                <p class="text-center">
+                    <strong>Konnya</strong>
+                </p>
+                <br> <a href="#" data-name="kanya" data-toggle="modal" data-target="#rashiModal"> <img
+                        src="img/Rashi_0005.png" class="img-circle person" alt="Random Name" width="145" height="145">
+                </a>
+                <!-- <div id="demo6" class="collapse">
+					<p>Konnya</p>
+					<button type="button" class="btn btn-info btn-sm button"
+						data-toggle="modal" data-target="#rashiModal">Click here</button>
+				</div> -->
+                <p>Contact: 8335824563 &amp; 8582973401</p>
+            </div>
+            <!--    <div class="row">-->
+            <div class="col-sm-3">
+                <p class="text-center">
+                    <strong>Tulla</strong>
+                </p>
+                <br> <a href="#" data-name="tula" data-toggle="modal" data-target="#rashiModal"> <img
+                        src="img/Rashi_0006.png" class="img-circle person" alt="Random Name" width="145" height="145">
+                </a>
+                <!-- <div id="demo7" class="collapse">
+					<p>Tulaa</p>
+					<button type="button" class="btn btn-info btn-sm button"
+						data-toggle="modal" data-target="#rashiModal">Click here</button>
+				</div> -->
+                <p>Contact: 8335824563 &amp; 8582973401</p>
+            </div>
+            <div class="col-sm-3">
+                <p class="text-center">
+                    <strong>Brishchik</strong>
+                </p>
+                <br> <a href="#" data-name="brischik" data-toggle="modal" data-target="#rashiModal"> <img
+                        src="img/Rashi_0007.png" class="img-circle person" alt="Random Name" width="145" height="145">
+                </a>
+                <!-- <div id="demo8" class="collapse">
+					<p>Brishchik</p>
+					<button type="button" class="btn btn-info btn-sm button"
+						data-toggle="modal" data-target="#rashiModal">Click here</button>
+				</div> -->
+                <p>Contact: 8335824563 &amp; 8582973401</p>
+            </div>
+            <div class="col-sm-3">
+                <p class="text-center">
+                    <strong>Dhonu</strong>
+                </p>
+                <br> <a href="#" data-name="dhanu" data-toggle="modal" data-target="#rashiModal"> <img
+                        src="img/Rashi_0008.png" class="img-circle person" alt="Random Name" width="145" height="145">
+                </a>
+                <!-- <div id="demo9" class="collapse">
+					<p>Dhonu</p>
+					<button type="button" class="btn btn-info btn-sm button"
+						data-toggle="modal" data-target="#rashiModal">Click here</button>
+				</div> -->
+                <p>Contact: 8335824563 &amp; 8582973401</p>
+            </div>
+            <div class="col-sm-3">
+                <p class="text-center">
+                    <strong>Makar</strong>
+                </p>
+                <br> <a href="#" data-name="makar" data-toggle="modal" data-target="#rashiModal"> <img
+                        src="img/Rashi_0009.png" class="img-circle person" alt="Random Name" width="145" height="145">
+                </a>
+                <!-- <div id="demo10" class="collapse">
+					<p>Makar</p>
+					<button type="button" class="btn btn-info btn-sm button"
+						data-toggle="modal" data-target="#rashiModal">Click here</button>
+				</div> -->
+                <p>Contact: 8335824563 &amp; 8582973401</p>
+            </div>
+            <div class="col-sm-3">
+                <p class="text-center">
+                    <strong>Kumvho</strong>
+                </p>
+                <br> <a href="#" data-name="kumbha" data-toggle="modal" data-target="#rashiModal"> <img
+                        src="img/Rashi_0010.png" class="img-circle person" alt="Random Name" width="145" height="145">
+                </a>
+                <!-- <div id="demo11" class="collapse">
+					<p>Kumvho</p>
+					<button type="button" class="btn btn-info btn-sm button"
+						data-toggle="modal" data-target="#rashiModal">Click here</button>
+				</div> -->
+                <p>Contact: 8335824563 &amp; 8582973401</p>
+            </div>
+            <div class="col-sm-3">
+                <p class="text-center">
+                    <strong>Meen</strong>
+                </p>
+                <br> <a href="#" data-name="meen" data-toggle="modal" data-target="#rashiModal"> <img
+                        src="img/Rashi_0011.png" class="img-circle person" alt="Random Name" width="145" height="145">
+                </a>
+                <!-- <div id="demo12" class="collapse">
+					<p>Meen</p>
+					<button type="button" class="btn btn-info btn-sm button"
+						data-toggle="modal" data-target="#rashiModal">Click here</button>
+				</div> -->
+                <p>Contact: 8335824563 &amp; 8582973401</p>
+            </div>
+        </div>
+    </div>
+
+    <!-- Rashi Modal -->
+    <div class="modal fade" id="rashiModal" role="dialog">
+        <div class="modal-dialog modal-md">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+                    <h4 class="modal-title">Rachi for this month</h4>
+                </div>
+                <div class="modal-body" style="max-height: calc(100vh - 112px); overflow-y: auto;">
+                    <div id="rashi">
+                        <div class="container-fluid">
+                            <div id="Rashi-row" class="row justify-content-center align-items-center">
+                                <!--  <div id="rashi-column" class="col-lg-6">
+									<div id="rashi-box" class="col-lg-10">-->
+                                <div th:replace="fragments/rashifal.html ::rashi(${monthName})"></div>
+                                <!-- </div>
+								</div> -->
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!--Rashi-End-->
+    <br>
+    <br>
+
+    <div class="container-fluid text-center" id="Services">
+        <h2>SERVICES</h2>
+        <h3>WHAT WE OFFER</h3>
+        <br>
+        <div class="row">
+            <div class="col-sm-4">
+                <a href="#" data-toggle="modal" data-target="#bookingModal" data-bookingtype="free"
+                    data-bookingdesc="Free Booking"><span class="glyphicon glyphicon-phone"></span></a>
+                <h5>FREE DISCUSSION</h5>
+                <p>Telephonic appointment, Reserve calendar slot</P>
+                <P>Time 9pm- 10:30 pm</P>
+                <p>Mailid: Somsomnath40@gmail.com</p>
+                <p>Paytm number: 8335824563</p>
+                <p>Whatsapp number : 8335824563 and 9051762117</p>
+                <p>Calling Number : 8335824563 &amp; 8582973401</p>
+                <p>Blessings location point : Kolkata &amp; Mumbai</p>
+            </div>
+            <div class="col-sm-4">
+                <a href="#" data-toggle="modal" data-target="#bookingModal" data-bookingtype="paid"
+                    data-bookingdesc="Paid Booking"><span class="glyphicon glyphicon-phone-alt"></span></a>
+                <h5>PAID CONSULTENCY</h5>
+                <p>Booking appointment, Telephonic /video call (Google Talk)</p>
+                <P>Reserve calendar slot, Notification through SMS</P>
+                <p>Mailid: Somsomnath40@gmail.com</p>
+                <p>Paytm number: 8335824563</p>
+                <p>Whatsapp number : 8335824563 &amp; 9051762117</p>
+                <p>Calling Number : 8335824563 &amp; 8582973401</p>
+                <p>Blessings location point : Kolkata &amp; Mumbai</p>
+            </div>
+            <div class="col-sm-4">
+                <span class="glyphicon glyphicon-folder-open"></span>
+                <h5>KUNDLI REPORT</h5>
+                <p>1 yr report with solution (Daily,weekly,Monthly basis), 2 yrs
+                    report with solution, 5 yrs report with solution</p>
+                <p>Money development &amp; fortune analysis, remidy</p>
+                <p>Mailid: Somsomnath40@gmail.com</p>
+                <p>Paytm number: 8335824563</p>
+                <p>Whatsapp number : 8335824563 &amp; 9051762117</p>
+                <p>Calling Number : 8335824563 &amp; 8582973401</p>
+            </div>
+        </div>
+    </div>
+    <br>
+    <br>
+    <div th:replace="fragments/booking.html ::book(${booking})"></div>
+
+    <!-- Container (VISITING DATES) -->
+    <div id="DateVisit" class="bg-1">
+        <div class="container">
+            <h3 class="text-center">VISITING DATES</h3>
+            <p class="text-center">Already booked</p>
+            <ul class="list-group">
+                <li class="list-group-item">January <span class="label label-danger">Booked!</span></li>
+                <li class="list-group-item">February <span class="label label-danger">Booked!</span></li>
+                <li class="list-group-item">March <span class="badge">3</span></li>
+            </ul>
+
+            <div class="row text-center">
+                <h4 class="text-center" id="product">PRODUCT</h4>
+                <h3>Rituals of Worship</h3>
+                <p class="h3 text-center">Jayanti Puja</p>
+                <p class="text-center">To overcome the unfavourable adverse
+                    financial situation, in the first phase of progress and the arrival
+                    of the proper means of daily living. Subscription: 40/day or
+                    1000/month</p>
+
+                <p class="h3 text-center">Dhanada Puja</p>
+                <p class="text-center">Next step of jayanti puja. Second chapter
+                    of the development of life, journey from subdued to mid-way.
+                    Profitability of financial gain and business success. Subscription:
+                    80/day or 2000/month</p>
+
+                <p class="h3 text-center">Soubhagya Lakshmi</p>
+                <p class="text-center">The next phase of wealth worship, the
+                    development of living from the middle to the high altitudes, the
+                    financial fortunes in it, the business success is unbearable.
+                    Subscription: 100/day or 2800/month</p>
+
+                <p class="h3 text-center">Oisorjjo Lakshmi</p>
+                <p class="text-center">Success in prosperity with wealth and
+                    financial fortune. Subscription: 120/day or 3500/month</p>
+                <p class="text-center">Buy appropriate product</p>
+
+
+                <div class="col-sm-3">
+                    <div class="thumbnail">
+                        <img src="img/Product-img/Bakratunda-Batika.png" alt="Bakratunda-Batika" width="400"
+                            height="300"><span>2019</span>
+                        <p>
+                            <strong>Bakratunda-Batika</strong>
+                        </p>
+                        <p>15th April 2019</p>
+                        <button class="btn" data-toggle="modal" data-target="#productModal">Book</button>
+                    </div>
+                </div>
+                <div class="col-sm-3">
+                    <div class="thumbnail">
+                        <img src="img/Product-img/Akhshay-Tritiya.png" alt="Akhshay-Tritiya" width="400"
+                            height="300"><span>2019</span>
+                        <p>
+                            <strong>Akhshay-Tritiya</strong>
+                        </p>
+                        <p>7th May 2019</p>
+                        <button class="btn" data-toggle="modal" data-target="#productModal">Book</button>
+                    </div>
+                </div>
+                <div class="col-sm-3">
+                    <div class="thumbnail">
+                        <img src="img/Product-img/Ratha-Yatra.png" alt="Ratha-Yatra" width="400"
+                            height="300"><span>2019</span>
+                        <p>
+                            <strong>Ratha-Yatra</strong>
+                        </p>
+                        <p>4th July 2019</p>
+                        <button class="btn" data-toggle="modal" data-target="#productModal">Book</button>
+                    </div>
+                </div>
+                <div class="col-sm-3">
+                    <div class="thumbnail">
+                        <img src="img/Product-img/Jhulan-Purnima.png" alt="Jhulan-Purnima" width="400"
+                            height="300"><span>2019</span>
+                        <p>
+                            <strong>Jhulan-Purnima</strong>
+                        </p>
+                        <p>14th August2019</p>
+                        <button class="btn" data-toggle="modal" data-target="#productModal">Book</button>
+                    </div>
+                </div>
+                <div class="col-sm-3">
+                    <div class="thumbnail">
+                        <img src="img/Product-img/Janmastami.png" alt="Janmastami" width="400"
+                            height="300"><span>2019</span>
+                        <p>
+                            <strong>Janmastami</strong>
+                        </p>
+                        <p>23th August, 2019</p>
+                        <button class="btn" data-toggle="modal" data-target="#productModal">Book</button>
+                    </div>
+                </div>
+                <div class="col-sm-3">
+                    <div class="thumbnail">
+                        <img src="img/Product-img/Vinayak-Brata.png" alt="Vinayak-Brata" width="400"
+                            height="300"><span>2019</span>
+                        <p>
+                            <strong>Vinayak-Brata</strong>
+                        </p>
+                        <p>3rd September, 2019</p>
+                        <button class="btn" data-toggle="modal" data-target="#productModal">Book</button>
+                    </div>
+                </div>
+                <div class="col-sm-3">
+                    <div class="thumbnail">
+                        <img src="img/Product-img/Kojagari-Lakhmi-Puja.png" alt="Kojagari-Lakhmi-Puja" width="400"
+                            height="300"><span>2019</span>
+                        <p>
+                            <strong>Kojagari-Lakhmi-Puja</strong>
+                        </p>
+                        <p>13th October,2019</p>
+                        <button class="btn" data-toggle="modal" data-target="#productModal">Book</button>
+                    </div>
+                </div>
+                <div class="col-sm-3">
+                    <div class="thumbnail">
+                        <img src="img/Product-img/Dhan-Trayodashi.png" alt="Dhan-Trayodashi" width="400"
+                            height="300"><span>2019</span>
+                        <p>
+                            <strong>Dhan-Trayodashi</strong>
+                        </p>
+                        <p>25th October,2019</p>
+                        <button class="btn" data-toggle="modal" data-target="#productModal">Book</button>
+                    </div>
+                </div>
+                <div class="col-sm-3">
+                    <div class="thumbnail">
+                        <img src="img/Product-img/Diwali-Shri amabassya (2).png" alt="Diwali-Shri amabassya (2)"
+                            width="400" height="300"><span>2019</span>
+                        <p>
+                            <strong>Shri amabassya</strong>
+                        </p>
+                        <p>27th October,2019</p>
+                        <button class="btn" data-toggle="modal" data-target="#productModal">Book</button>
+                    </div>
+                </div>
+                <div class="col-sm-3">
+                    <div class="thumbnail">
+                        <img src="img/Product-img/Shri-panchami (1).png" alt="Shri-panchami (1)" width="400"
+                            height="300"><span>2019</span>
+                        <p>
+                            <strong>Shri-panchami </strong>
+                        </p>
+                        <p>29th January ,2019</p>
+                        <button class="btn" data-toggle="modal" data-target="#productModal">Book</button>
+                    </div>
+                </div>
+                <div class="col-sm-3">
+                    <div class="thumbnail">
+                        <img src="img/Product-img/Dol-purnima (1).png" alt="Dol-purnima" width="400"
+                            height="300"><span>2019</span>
+                        <p>
+                            <strong>Dol-purnima, Srikamal Broto</strong>
+                        </p>
+                        <p>9th March 2019</p>
+                        <button class="btn" data-toggle="modal" data-target="#productModal">Book</button>
+                    </div>
+                </div>
+                <div class="col-sm-3">
+                    <div class="thumbnail">
+                        <img src="img/Product-img/Annapurna-Puja.png" alt="Annapurna-Puja" width="400"
+                            height="300"><span>2019</span>
+                        <p>
+                            <strong>Annapurna-Puja, Annokut</strong>
+                        </p>
+                        <p>1sth April, 2019</p>
+                        <button class="btn" data-toggle="modal" data-target="#productModal">Book</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Modal -->
+        <div class="modal fade" id="productModal" role="dialog">
+            <div class="modal-dialog">
+
+                <!-- Modal content-->
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal">×</button>
+                        <h4>
+                            <span class="glyphicon glyphicon-lock"></span> Product
+                        </h4>
+                    </div>
+                    <div class="modal-body">
+                        <div sec:authorize="isAnonymous()">
+                            <span>Please log in to buy products</span>
+                        </div>
+                        <form role="form" class="form" action="#" method="post" th:action="@{/buy}"
+                            th:object="${payment}">
+                            <div class="form-group">
+                                <!-- <label for="product"><span
+									class="glyphicon glyphicon-shopping-cart"></span> Product</label> -->
+                                <input type="hidden" class="form-control" id="product" th:field="*{description}">
+                            </div>
+                            <div class="form-group">
+                                <label for="psw"><span class="glyphicon glyphicon-shopping-cart"></span> Cart</label>
+                                <input type="number" class="form-control" id="psw" placeholder="Puja name?"
+                                    th:field="*{noOfItems}">
+                            </div>
+                            <div class="form-group">
+                                <label for="usrname"><span class="glyphicon glyphicon-user"></span> Send To</label>
+                                <input type="text" class="form-control" id="usrname" placeholder="Enter email"
+                                    th:field="*{email}">
+                            </div>
+                            <button type="submit" class="btn btn-block" th:disabled="*{disabled}">
+                                Agree <span class="glyphicon glyphicon-ok"></span>
+                            </button>
+                        </form>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="submit" class="btn btn-danger btn-default pull-left" data-dismiss="modal">
+                            <span class="glyphicon glyphicon-remove"></span> Cancel
+                        </button>
+                        <p>
+                            Need <a href="#">help?</a>
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Container (Contact Section) -->
+    <div id="contact" class="container">
+        <h3 class="text-center">Contact</h3>
+        <p class="text-center">
+            <em>We love our fans!</em>
+        </p>
+
+        <div class="row">
+            <div class="col-md-4">
+                <p>Interested? Drop a note.</p>
+                <p>
+                    <span class="glyphicon glyphicon-map-marker"></span> Kolkata, WB,
+                    India
+                </p>
+                <p>
+                    <span class="glyphicon glyphicon-phone"></span> Phone: +00
+                    8335824563 &amp; 8582973401
+                </p>
+                <p>
+                    <span class="glyphicon glyphicon-envelope"></span> Email:
+                    Somsomnath40@gmail.com
+                </p>
+            </div>
+            <div class="col-md-8">
+                <div class="row">
+                    <div class="col-sm-6 form-group">
+                        <input class="form-control" id="name" name="name" placeholder="Name" type="text" required>
+                    </div>
+                    <div class="col-sm-6 form-group">
+                        <input class="form-control" id="email" name="email" placeholder="Email" type="email" required>
+                    </div>
+                </div>
+                <textarea class="form-control" id="comments" name="comments" placeholder="Comment" rows="5"></textarea>
+                <br>
+                <div class="row">
+                    <div class="col-md-12 form-group">
+                        <button class="btn pull-right" type="submit">Send</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <br>
+        <h3 class="text-center" id="Feedback">Feedback From Fans</h3>
+        <ul class="nav nav-tabs">
+            <li class="active"><a data-toggle="tab" href="#home">R.
+                    Chakraborty</a></li>
+            <li><a data-toggle="tab" href="#menu1">S. Das Nandi</a></li>
+            <li><a data-toggle="tab" href="#menu2">S. Ghoshal</a></li>
+            <li><a data-toggle="tab" href="#menu3">J. Mukherjee
+                    (Silchar)</a></li>
+            <li><a data-toggle="tab" href="#menu4">G. Bhattacharya</a></li>
+        </ul>
+
+        <div class="tab-content">
+            <div id="home" class="tab-pane fade in active">
+                <h2>Rajkumar Chakraborty (Kolkata)</h2>
+                <p>Since 1991, I have been associated with Mahalaxmi temple. I
+                    was a disciple of Guru Anandinath. I had a small storehouse. My
+                    shop did not work well. My uncle took me to Mahalaxmi temple. I
+                    have been successful since I started worshiping Mahalakshmi. Today
+                    my store is very popular in the Behala area and I am doing well in
+                    my business.</p>
+            </div>
+            <div id="menu1" class="tab-pane fade">
+                <h2>Soma Das Nandi, (Tollygunge)</h2>
+                <p>14th May of 2015 is one of the most memorable days in my
+                    life. When I came here, my life was completely disastrous. Somnath
+                    Bhattacharya is just like my younger brother. According to his
+                    suggestion I started worshipping Mahalakshmi and followed every
+                    steps suggested by him. Though the entire process was very time
+                    consuming and one has to be very patient during the whole process
+                    and then my good fortune came back and I got back a changed life
+                    after that. Now I am completely a stress free and anxiety free
+                    woman. I got back the rhythm of my life. Somnath Bhattacharya is a
+                    God sent Messenger to me.</p>
+            </div>
+            <div id="menu2" class="tab-pane fade">
+                <h2>Shushovon Ghoshal (Pune)</h2>
+                <p>I am a resident of Shivaji Nagar Bhandarkar, Pune. I was
+                    associated with Somnath Bhattacharya since 2010. I came to his holy
+                    temple after watching him in Star Utsav Channel. Then after I
+                    started worshipping Mahalakshmi and had shingle I regained
+                    prosperity in my business. I became the member the Soubhagya Shree
+                    family in 2013. Since then my Cab business is running smoothly. I
+                    run 25 pool cars in Pune. I have shared 5% of my income for the
+                    worship of Soubhagya Lakshmi.</p>
+            </div>
+            <div id="menu3" class="tab-pane fade">
+                <h2>Joydeep Mukherjee (Silchar)</h2>
+                <p>It’s been six month I have come to know about Mahalakshmi
+                    Mandir from Aakash Aath channel. After that I discussed my business
+                    problems with Somnath Bhattacharya over phone then he suggested
+                    rituals of worshipping Soubhagya Lakshmi Puja. I started following
+                    the rituals as guided by him. Initially for about 2 months there
+                    was no improvement in my business. After 3 months time I started
+                    earning profit in my business. I have a sweet shop in Silchar and
+                    now it is running very well.</p>
+            </div>
+            <div id="menu4" class="tab-pane fade">
+                <h2>Gopal Bhattacharya (Chandannagar)</h2>
+                <p>I stay in Chandannagar. I had seen a programme of Somnath
+                    Bhattacharya in Sonar Bangla Channel and became a follower of
+                    Mahalakshmi Mandir since 2008. In Chandannagar I had a Fish Shop.
+                    From that small shop today I am the owner of 3 guest houses by the
+                    blessings of Mahalakshmi.</p>
+            </div>
+        </div>
+    </div>
+
+    <!-- Image of location/map -->
+    <img src="img/astrology-images-001.png" class="img-responsive" style="width: 100%">
+
+    <!-- Footer -->
+    <footer class="text-center">
+        <a class="up-arrow" href="#myPage" data-toggle="tooltip" title="TO TOP"> <span
+                class="glyphicon glyphicon-chevron-up"></span>
+        </a><br> <br>
+        <p>
+            © 2019 Somnath Bhattacharyee All Rights Reserved<a href="https://www.personname.com" data-toggle="tooltip"
+                title="Visit w3schools"></a>
+        </p>
+    </footer>
+
+    <script>
+        $(document).ready(
+            function () {
+                // Initialize Tooltip
+                $('[data-toggle="tooltip"]').tooltip();
+
+                // Add smooth scrolling to all links in navbar + footer link
+                $(".navbar a, footer a[href='#myPage']").on('click',
+                    function (event) {
+
+                        // Make sure this.hash has a value before overriding default behavior
+                        if (this.hash !== "") {
+
+                            // Prevent default anchor click behavior
+                            event.preventDefault();
+
+                            // Store hash
+                            var hash = this.hash;
+
+                            // Using jQuery's animate() method to add smooth page scroll
+                            // The optional number (900) specifies the number of milliseconds it takes to scroll to the specified area
+                            $('html, body').animate({
+                                scrollTop: $(hash).offset().top
+                            }, 900, function () {
+
+                                // Add hash (#) to URL when done scrolling (default click behavior)
+                                window.location.hash = hash;
+                            });
+                        } // End if
+                    });
+                $("[id*='link'] a").on('click', function (e) {
+
+                    console.log("Target=" + $(this).data('target'));
+                    console.log("Source=" + $(this).data('source'));
+                    ;
+                    ;
+                    var target = '#' + $(this).data('target');
+                    var source = '#' + $(this).data('source');
+                    $(source).hide();
+                    $(target).show();
+                    e.preventDefault();
+                });
+            })
+    </script>
+
+</body>
+
+</html>
