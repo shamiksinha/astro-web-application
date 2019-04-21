@@ -383,7 +383,8 @@
             href="https://www.youtube.com/channel/UCJRfCPlqirM00Bh04g-SJpQ" class="youtube"><i
                 class="fab fa-youtube"></i></a>
     </div>
-    <audio autoplay loop preload="metadata">
+    <iframe src="audio/250-milliseconds-of-silence.mp3" th:src="@{/audio/250-milliseconds-of-silence.mp3}" allow="autoplay" id="audio" style="display:none"></iframe>
+    <audio autoplay loop preload="auto">
         <source src="audio/mahalakshmi-mantra.mp3" th:src="@{/audio/mahalakshmi-mantra.mp3}" type="audio/mpeg">
         Your browser does not support the audio tag.
     </audio>
@@ -1239,7 +1240,7 @@
                     $(source).hide();
                     $(target).show();
                     e.preventDefault();
-                });
+                });        
             })
     </script>
 
