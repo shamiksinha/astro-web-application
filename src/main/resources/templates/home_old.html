@@ -1,0 +1,1098 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org"
+	xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+<head>
+<!-- Theme Made By www.w3schools.com - No Copyright -->
+<title>SD Theme</title>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link href="css/default.css" th:href="@{/css/default.css}"
+	rel="stylesheet" media="screen" />
+<link
+	href="http://cdn.jsdelivr.net/webjars/bootstrap/3.4.0/css/bootstrap.min.css"
+	th:href="@{/webjars/bootstrap/3.4.0/css/bootstrap.min.css}"
+	rel="stylesheet" media="screen" />
+
+<link
+	href="http://cdn.jsdelivr.net/webjars/bootstrap-datetimepicker/2.4.2/css/bootstrap-datetimepicker.min.css"
+	th:href="@{/webjars/bootstrap-datetimepicker/2.4.2/css/bootstrap-datetimepicker.min.css}"
+	rel="stylesheet" media="screen" />
+<style>
+body {
+	font: 400 15px/1.8 Lato, sans-serif;
+	color: #777;
+}
+
+h3, h4 {
+	margin: 10px 0 30px 0;
+	letter-spacing: 10px;
+	font-size: 20px;
+	color: #111;
+}
+
+.container {
+	padding-top: 60px;
+	padding-right: 60px;
+	padding-left: 60px;
+	padding-bottom: 60px;
+}
+
+.person {
+	border: 10px solid transparent;
+	margin-bottom: 25px;
+	/*    width: 80%;
+    height: 80%;*/
+	opacity: 0.7;
+}
+
+.person:hover {
+	border-color: #999;
+}
+
+.carousel-inner img {
+	-webkit-filter: grayscale(70%);
+	filter: grayscale(70%); /* make all photos black and white */
+	width: 100%; /* Set width to 100% */
+	margin: auto;
+}
+
+.carousel-caption h3 {
+	color: #fff !important;
+}
+
+@media ( max-width : 600px) {
+	.carousel-caption {
+		display: none;
+		/* Hide the carousel text when the screen is less than 600 pixels wide */
+	}
+}
+
+.bg-1 {
+	background: #2d2d30;
+	color: #bdbdbd;
+}
+
+.bg-1 h3 {
+	color: #fff;
+}
+
+.bg-1 p {
+	font-style: italic;
+}
+
+.list-group-item:first-child {
+	border-top-right-radius: 0;
+	border-top-left-radius: 0;
+}
+
+.list-group-item:last-child {
+	border-bottom-right-radius: 0;
+	border-bottom-left-radius: 0;
+}
+
+.thumbnail {
+	padding: 0 0 15px 0;
+	border: none;
+	border-radius: 0;
+}
+
+.thumbnail p {
+	margin-top: 15px;
+	color: #555;
+}
+
+.btn {
+	padding: 10px 20px;
+	background-color: #333;
+	color: #f1f1f1;
+	border-radius: 0;
+	transition: .2s;
+}
+
+.btn:hover, .btn:focus {
+	border: 1px solid #333;
+	background-color: #fff;
+	color: #000;
+}
+
+.modal-header, h4, .close {
+	background-color: #333;
+	color: #fff !important;
+	text-align: center;
+	font-size: 30px;
+}
+
+.modal-header, .modal-body {
+	padding: 40px 50px;
+}
+
+.nav-tabs li a {
+	color: #777;
+}
+
+#googleMap {
+	width: 100%;
+	height: 400px;
+	-webkit-filter: grayscale(100%);
+	filter: grayscale(100%);
+}
+
+.navbar {
+	font-family: Montserrat, sans-serif;
+	margin-bottom: 0;
+	background-color: #2d2d30;
+	border: 0;
+	font-size: 11px !important;
+	letter-spacing: 4px;
+	opacity: 0.9;
+}
+
+.navbar li a, .navbar .navbar-brand {
+	color: #d5d5d5 !important;
+}
+
+.navbar-nav li a:hover {
+	color: #fff !important;
+}
+
+.navbar-nav li.active a {
+	color: #fff !important;
+	background-color: #29292c !important;
+}
+
+.navbar-default .navbar-toggle {
+	border-color: transparent;
+}
+
+.open .dropdown-toggle {
+	color: #fff;
+	background-color: #555 !important;
+}
+
+.dropdown-menu li a {
+	color: #000 !important;
+}
+
+.dropdown-menu li a:hover {
+	background-color: red !important;
+}
+
+footer {
+	background-color: #2d2d30;
+	color: #f5f5f5;
+	padding: 32px;
+}
+
+footer a {
+	color: #f5f5f5;
+}
+
+footer a:hover {
+	color: #777;
+	text-decoration: none;
+}
+
+.form-control {
+	border-radius: 0;
+}
+
+textarea {
+	resize: none;
+}
+
+<!--
+.button2 {
+	border-radius: 4px;
+}
+
+-->
+.btn1 {
+	padding: 10px 20px;
+	background-color: #333;
+	color: #F00;
+	border-radius: 0;
+	transition: .2s;
+}
+
+.thumbnail1 {
+	padding: 0 0 15px 0;
+	border: none;
+	border-radius: 0;
+}
+
+}
+#login .container #login-row #login-column #login-box {
+	margin-top: 120px;
+	max-width: 600px;
+	height: 320px;
+	border: 1px solid #9C9C9C;
+	background-color: #EAEAEA;
+}
+
+#login .container #login-row #login-column #login-box #login-form {
+	padding: 20px;
+}
+
+#login .container #login-row #login-column #login-box #login-form #register-link
+	{
+	margin-top: -85px;
+}
+</style>
+<!-- <script
+	src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+<script
+	src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/js/bootstrap.min.js"></script>
+	 -->
+<script
+	src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"
+	th:src="@{/webjars/jquery/3.3.1/jquery.min.js}"></script>
+<script
+	src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/js/bootstrap.min.js"
+	th:src="@{/webjars/bootstrap/3.4.0/js/bootstrap.min.js}"></script>
+
+<script
+	src="https://maxcdn.bootstrapcdn.com/bootstrap-datetimepicker/2.4.2/js/bootstrap-datetimepicker.min.js"
+	th:src="@{/webjars/bootstrap-datetimepicker/2.4.2/js/bootstrap-datetimepicker.min.js}"></script>
+
+<script
+	src="https://cdnjs.cloudflare.com/ajax/libs/jquery.form/4.2.2/jquery.form.min.js"
+	integrity="sha384-FzT3vTVGXqf7wRfy8k4BiyzvbNfeYjK+frTVqZeNDFl8woCbF0CYG6g2fMEFFo/i"
+	crossorigin="anonymous"
+	th:src="@{/webjars/jquery-form/4.2.2/jquery.form.min.js}"></script>
+
+</head>
+<body id="myPage" data-spy="scroll" data-target=".navbar"
+	data-offset="50">
+
+	<nav class="navbar navbar-default navbar-fixed-top">
+		<div class="container-fluid">
+			<div class="navbar-header">
+				<button type="button" class="navbar-toggle" data-toggle="collapse"
+					data-target="#myNavbar">
+					<span class="icon-bar"></span> <span class="icon-bar"></span> <span
+						class="icon-bar"></span>
+				</button>
+				<a class="navbar-brand" href="#myPage">Somnath Bhattachariya </a>
+			</div>
+			<div class="collapse navbar-collapse" id="myNavbar">
+				<ul class="nav navbar-nav navbar-right">
+					<li><a href="#myPage">HOME</a></li>
+					<li><a href="#Services">SERVICES</a></li>
+					<li><a href="#product">PRODUCT</a></li>
+					<li><a href="#memberProfile">MEMBER PROFILE</a></li>
+					<li><a href="#contact">CONTACT</a></li>
+					<li class="dropdown"><a class="dropdown-toggle"
+						data-toggle="dropdown" href="#">MORE <span class="caret"></span></a>
+						<ul class="dropdown-menu">
+							<li><a href="#Updates">Current Setuation</a></li>
+							<li><a href="#DateVisit">visiting Date</a></li>
+							<li><a href="#Feedback">Feedbaack</a></li>
+						</ul></li>
+					<li><a href="#"><span class="glyphicon glyphicon-search"></span></a></li>
+				</ul>
+			</div>
+		</div>
+	</nav>
+	<!-- Wrapper carousel -->
+	<div class="container">
+		<h2>To all my belovate</h2>
+		<div id="myCarousel" class="carousel slide" data-ride="carousel">
+			<!-- Indicators -->
+			<ol class="carousel-indicators">
+				<li data-target="#myCarousel" data-slide-to="0" class="active"></li>
+				<li data-target="#myCarousel" data-slide-to="1"></li>
+				<li data-target="#myCarousel" data-slide-to="2"></li>
+			</ol>
+
+			<!-- Wrapper for slides -->
+			<div class="carousel-inner">
+				<div class="item active">
+					<img src="img/backgrounds-galaxy-001.png" alt="Los Angeles"
+						style="width: 100%;">
+				</div>
+
+				<div class="item">
+					<img src="img/backgrounds-galaxy-002.png" alt="Los Angeles"
+						style="width: 100%;">
+				</div>
+
+				<div class="item">
+					<img src="img/backgrounds-galaxy-03.png" alt="Los Angeles"
+						style="width: 100%;">
+				</div>
+			</div>
+
+			<!-- Left and right controls -->
+			<a class="left carousel-control" href="#myCarousel" data-slide="prev">
+				<span class="glyphicon glyphicon-chevron-left"></span> <span
+				class="sr-only">Previous</span>
+			</a> <a class="right carousel-control" href="#myCarousel"
+				data-slide="next"> <span
+				class="glyphicon glyphicon-chevron-right"></span> <span
+				class="sr-only">Next</span>
+			</a>
+		</div>
+	</div>
+	<div class="container">
+		<h3>Few Words</h3>
+		<p>We have created a fictional band website. Lorem ipsum dolor sit
+			amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt
+			ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis
+			nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo
+			consequat. Duis aute irure dolor in reprehenderit in voluptate velit
+			esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat
+			cupidatat non proident, sunt in culpa qui officia deserunt mollit
+			anim id est laborum consectetur adipiscing elit, sed do eiusmod
+			tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim
+			veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex
+			ea commodo consequat.</p>
+	</div>
+
+
+	<div class="container" id="memberProfile"
+		sec:authorize="hasAuthority('USER')">
+		<div align="right">
+			<h3>MEMBER PROFILE</h3>
+			<!-- Trigger the modal with a button -->
+			<div class="welcome">
+				<span sec:authorize="isAuthenticated()">Welcome <span
+					sec:authentication="principal.firstName"></span> <span
+					sec:authentication="principal.lastName"></span>
+				</span>
+			</div>
+			<button type="button" class="btn btn-info btn-sm button">PROFILE</button>
+		</div>
+	</div>
+
+	<!-- Container (The Band Section) -->
+
+
+	<div id="Updates" class="container text-center">
+		<h3>CURRENT SETUATION</h3>
+		<p>
+			<em>We love music!</em>
+		</p>
+		<p>We have created a fictional band website. Lorem ipsum dolor sit
+			amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt
+			ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis
+			nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo
+			consequat. Duis aute irure dolor in reprehenderit in voluptate velit
+			esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat
+			cupidatat non proident, sunt in culpa qui officia deserunt mollit
+			anim id est laborum consectetur adipiscing elit, sed do eiusmod
+			tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim
+			veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex
+			ea commodo consequat.</p>
+		<br>
+		<div class="row">
+			<div class="col-sm-2">
+				<p class="text-center">
+					<strong>Mesh</strong>
+				</p>
+				<br> <a href="#demo" data-toggle="collapse"> <img
+					src="img/Rashi_0000.png" class="img-circle person"
+					alt="Random Name" width="145" height="145">
+				</a>
+				<div id="demo" class="collapse">
+					<p>Mesh Rashi</p>
+					<p>Good time</p>
+					<p>Contact 8240693397</p>
+				</div>
+			</div>
+			<div class="col-sm-2">
+				<p class="text-center">
+					<strong>Brisho</strong>
+				</p>
+				<br> <a href="#demo2" data-toggle="collapse"> <img
+					src="img/Rashi_0001.png" class="img-circle person"
+					alt="Random Name" width="145" height="145">
+				</a>
+				<div id="demo2" class="collapse">
+					<p>Brisho</p>
+					<p>Good time</p>
+					<p>Contact 8240693397</p>
+				</div>
+			</div>
+			<div class="col-sm-2">
+				<p class="text-center">
+					<strong>Mithun</strong>
+				</p>
+				<br> <a href="#demo3" data-toggle="collapse"> <img
+					src="img/Rashi_0002.png" class="img-circle person"
+					alt="Random Name" width="145" height="145">
+				</a>
+				<div id="demo3" class="collapse">
+					<p>Mithun</p>
+					<p>Nice time</p>
+					<p>Contact 8240693397</p>
+				</div>
+			</div>
+			<div class="col-sm-2">
+				<p class="text-center">
+					<strong>Karkat</strong>
+				</p>
+				<br> <a href="#demo4" data-toggle="collapse"> <img
+					src="img/Rashi_0003.png" class="img-circle person"
+					alt="Random Name" width="145" height="145">
+				</a>
+				<div id="demo4" class="collapse">
+					<p>Karkat</p>
+					<p>Nice time</p>
+					<p>Contact 8240693397</p>
+				</div>
+			</div>
+			<div class="col-sm-2">
+				<p class="text-center">
+					<strong>Shingha</strong>
+				</p>
+				<br> <a href="#demo5" data-toggle="collapse"> <img
+					src="img/Rashi_0004.png" class="img-circle person"
+					alt="Random Name" width="145" height="145">
+				</a>
+				<div id="demo5" class="collapse">
+					<p>Shingha</p>
+					<p>Nice time</p>
+					<p>Contact 8240693397</p>
+				</div>
+			</div>
+			<div class="col-sm-2">
+				<p class="text-center">
+					<strong>Konnya</strong>
+				</p>
+				<br> <a href="#demo6" data-toggle="collapse"> <img
+					src="img/Rashi_0005.png" class="img-circle person"
+					alt="Random Name" width="145" height="145">
+				</a>
+				<div id="demo6" class="collapse">
+					<p>Konnya</p>
+					<p>Nice time</p>
+					<p>Contact 8240693397 to get detail</p>
+				</div>
+			</div>
+		</div>
+		<br>
+
+		<div class="row">
+
+			<div class="col-sm-2">
+				<p class="text-center">
+					<strong>Tulla</strong>
+				</p>
+				<br> <a href="#demo7" data-toggle="collapse"> <img
+					src="img/Rashi_0006.png" class="img-circle person"
+					alt="Random Name" width="145" height="145">
+				</a>
+				<div id="demo7" class="collapse">
+					<p>Tulaa</p>
+					<p>Nice time</p>
+					<p>Contact 8240693397 to get detail</p>
+				</div>
+			</div>
+			<div class="col-sm-2">
+				<p class="text-center">
+					<strong>Brishchik</strong>
+				</p>
+				<br> <a href="#demo8" data-toggle="collapse"> <img
+					src="img/Rashi_0007.png" class="img-circle person"
+					alt="Random Name" width="145" height="145">
+				</a>
+				<div id="demo8" class="collapse">
+					<p>Brishchik</p>
+					<p>Nice time</p>
+					<p>Contact 8240693397 to get detail</p>
+				</div>
+			</div>
+			<div class="col-sm-2">
+				<p class="text-center">
+					<strong>Dhonu</strong>
+				</p>
+				<br> <a href="#demo9" data-toggle="collapse"> <img
+					src="img/Rashi_0008.png" class="img-circle person"
+					alt="Random Name" width="145" height="145">
+				</a>
+				<div id="demo9" class="collapse">
+					<p>Dhonu</p>
+					<p>Nice time</p>
+					<p>Contact 8240693397 to get detail</p>
+				</div>
+			</div>
+			<div class="col-sm-2">
+				<p class="text-center">
+					<strong>Makar</strong>
+				</p>
+				<br> <a href="#demo10" data-toggle="collapse"> <img
+					src="img/Rashi_0009.png" class="img-circle person"
+					alt="Random Name" width="145" height="145">
+				</a>
+				<div id="demo10" class="collapse">
+					<p>Makar</p>
+					<p>Nice time</p>
+					<p>Contact 8240693397 to get detail</p>
+				</div>
+			</div>
+			<div class="col-sm-2">
+				<p class="text-center">
+					<strong>Kumvho</strong>
+				</p>
+				<br> <a href="#demo11" data-toggle="collapse"> <img
+					src="img/Rashi_0010.png" class="img-circle person"
+					alt="Random Name" width="145" height="145">
+				</a>
+				<div id="demo11" class="collapse">
+					<p>Kumvho</p>
+					<p>Nice time</p>
+					<p>Contact 8240693397 to get detail</p>
+				</div>
+			</div>
+			<div class="col-sm-2">
+				<p class="text-center">
+					<strong>Meen</strong>
+				</p>
+				<br> <a href="#demo12" data-toggle="collapse"> <img
+					src="img/Rashi_0011.png" class="img-circle person"
+					alt="Random Name" width="145" height="145">
+				</a>
+				<div id="demo12" class="collapse">
+					<p>Meen</p>
+					<p>Nice time</p>
+					<p>Contact 8240693397 to get detail</p>
+				</div>
+			</div>
+		</div>
+		<br> <br>
+
+		<div class="container-fluid text-center" id="Services">
+			<h2>SERVICES</h2>
+			<h3>WHAT WE OFFER</h3>
+			<br>
+			<div class="row">
+				<div class="col-sm-4">
+					<a href="#" data-toggle="modal" data-target="#bookingModal"><span
+						class="glyphicon glyphicon-phone"></span></a>
+					<h5>FREE DISCUSSION</h5>
+					<p>Telephonic appointment, Reserve calendar slot</P>
+					<P>Time 9pm- 10:30 pm</P>
+				</div>
+				<div class="col-sm-4">
+					<a href="#" data-toggle="modal" data-target="#bookingModal"><span class="glyphicon glyphicon-phone-alt"></span></a>
+					<h5>PAID CONSULTENCY</h5>
+					<p>Booking appointment, Telephonic /video call (Google Talk)</p>
+					<P>Reserve calendar slot, Notification through SMS</P>
+				</div>
+				<div class="col-sm-4">
+					<span class="glyphicon glyphicon-folder-open"></span>
+					<h5>KUNDLI REPORT</h5>
+					<p>1 yr report with solution (Daily,weekly,Monthly basis), 2
+						yrs report with solution, 5 yrs report with solution</p>
+					<p>Money development &amp; fortune analysis, remidy</p>
+				</div>
+			</div>
+		</div>
+
+	</div>
+
+	<div class="modal fade" id="bookingModal" role="dialog">
+		<div class="modal-dialog modal-lg">
+			<div class="modal-content">
+				<div class="modal-header">
+					<button type="button" class="close" data-dismiss="modal">&times;</button>
+					<h4 class="modal-title">Book</h4>
+				</div>
+				<div class="modal-body">
+					<!--<p>This is a large modal.</p>-->
+					<div id="login">
+						<h3 class="text-center text-white pt-5">Booking form</h3>
+						<div class="container">
+							<div id="login-row"
+								class="row justify-content-center align-items-center">
+								<div id="login-column" class="col-md-6">
+									<div id="login-box" class="col-md-12">
+										<form id="login-form" class="form" action="#" method="post"
+											th:object="${booking}" th:action="@{/booking}">
+											<input type="hidden" th:field="*{bookingDesc}" /> <input
+												type="hidden" th:field="*{allDayEvent}" /> <input
+												type="hidden" th:field="*{recurring}" /> <input
+												type="hidden" id="mirror_field" value="" readonly />
+											<h3 class="text-center text-info">Login</h3>
+											<div class="form-group input-prepend date"
+												id="datetimepicker">
+												<label for="startTime" class="text-info">Start Time:</label><br>
+												<input type="text" class="form-control form_datetime"
+													th:field="*{startTime}" readonly>
+											</div>
+											<div class="form-group">
+												<label for="endTime" class="text-info">End Time:</label><br>
+												<input type="text" class="form-control" readonly
+													th:field="*{endTime}">
+											</div>
+											<div class="form-group">
+												<input type="submit" name="submit"
+													class="btn btn-info btn-md" value="submit">
+											</div>
+
+										</form>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+				<div class="modal-footer">
+					<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+				</div>
+			</div>
+		</div>
+	</div>
+	<script type="text/javascript">
+		var options = {
+			startDate : new Date(),
+			minuteStep : 20,
+			todayBtn : 'linked',
+			daysOfWeekDisabled : [ 5, 6 ],
+			linkField : "mirror_field",
+			linkFormat : "yyyy-mm-dd hh:ii",
+			format : "yyyy-mm-dd hh:ii",
+			autoclose : true
+		}
+		$('.form_datetime').datetimepicker(options);
+		$('#startTime').on(
+				'change',
+				function(e) {
+					//alert($(this).val());
+					console.log($("#mirror_field").val());
+					var selectedTime = $(this).val();
+					var endDateTime = dateAdd(selectedTime, 'minute', 15);
+					var endDateTimeYear = endDateTime.getFullYear();
+					var endDateTimeMonth = endDateTime.getMonth()+1;
+					if (endDateTimeMonth < 10) {
+						endDateTimeMonth = '0' + endDateTimeMonth;
+					}
+					var endDateTimeDate = endDateTime.getDate();
+					if (endDateTimeDate < 10) {
+						endDateTimeDate = '0' + endDateTimeDate
+					}
+					var endDateTimeHours = endDateTime.getHours();
+					if (endDateTimeHours < 10) {
+						endDateTimeHours = '0' + endDateTimeHours;
+					}
+					var endDateTimeMinutes = endDateTime.getMinutes();
+					if (endDateTimeMinutes < 10) {
+						endDateTimeMinutes = '0' + endDateTimeMinutes;
+					}
+					$('#endTime').val(
+							endDateTimeYear + '-' + endDateTimeMonth + '-'
+									+ endDateTimeDate + ' ' + endDateTimeHours
+									+ ':' + endDateTimeMinutes);
+				});
+
+		/**
+		 * Adds time to a date. Modelled after MySQL DATE_ADD function.
+		 * Example: dateAdd(new Date(), 'minute', 30)  //returns 30 minutes from now.
+		 * https://stackoverflow.com/a/1214753/18511
+		 * 
+		 * @param date  Date to start with
+		 * @param interval  One of: year, quarter, month, week, day, hour, minute, second
+		 * @param units  Number of units of the given interval to add.
+		 */
+		function dateAdd(date, interval, units) {
+			var ret = new Date(date); //don't change original date
+			var checkRollover = function() {
+				if (ret.getDate() != date.getDate())
+					ret.setDate(0);
+			};
+			switch (interval.toLowerCase()) {
+			case 'year':
+				ret.setFullYear(ret.getFullYear() + units);
+				checkRollover();
+				break;
+			case 'quarter':
+				ret.setMonth(ret.getMonth() + 3 * units);
+				checkRollover();
+				break;
+			case 'month':
+				ret.setMonth(ret.getMonth() + units);
+				checkRollover();
+				break;
+			case 'week':
+				ret.setDate(ret.getDate() + 7 * units);
+				break;
+			case 'day':
+				ret.setDate(ret.getDate() + units);
+				break;
+			case 'hour':
+				ret.setTime(ret.getTime() + units * 3600000);
+				break;
+			case 'minute':
+				ret.setTime(ret.getTime() + units * 60000);
+				break;
+			case 'second':
+				ret.setTime(ret.getTime() + units * 1000);
+				break;
+			default:
+				ret = undefined;
+				break;
+			}
+			return ret;
+		}
+	</script>
+
+	<br>
+	<br>
+
+
+
+	<!-- Container (TOUR Section) -->
+	<div id="DateVisit" class="bg-1">
+		<div class="container">
+			<h3 class="text-center">VISITING DATES</h3>
+			<p class="text-center">Already booked</p>
+			<ul class="list-group">
+				<li class="list-group-item">January <span
+					class="label label-danger">Booked!</span></li>
+				<li class="list-group-item">February <span
+					class="label label-danger">Booked!</span></li>
+				<li class="list-group-item">March <span class="badge">3</span></li>
+			</ul>
+
+			<div class="row text-center" id="productDiv">
+				<h3 class="text-center" id="product">PRODUCT</h3>
+				<p class="text-center">Buy appropriate product</p>
+
+				<div class="col-sm-2">
+					<div class="thumbnail">
+						<img src="img/stones_0002_panya.jpg" alt="Pannya" width="400"
+							height="300">
+						<p>2019</p>
+						<p>
+							<strong>Pannya</strong>
+						</p>
+						<p>available for you</p>
+						<button class="btn" data-toggle="modal" data-target="#myModal"
+							data-item="pannya">Buy Now</button>
+					</div>
+				</div>
+				<div class="col-sm-2">
+					<div class="thumbnail">
+						<img src="img/stones_0003_Indra-Neelam.jpg" alt="New York"
+							width="400" height="300">
+						<p>2019</p>
+						<p>
+							<strong>Neela</strong>
+						</p>
+						<p>available for you</p>
+						<button class="btn" data-toggle="modal" data-target="#myModal"
+							data-item="neela">Buy Now</button>
+					</div>
+				</div>
+				<div class="col-sm-2">
+					<div class="thumbnail">
+						<img src="img/stones_0018_Rudrakhyo.jpg" alt="San Francisco"
+							width="400" height="300">
+						<p>2019</p>
+						<p>
+							<strong>Rudrakhyo</strong>
+						</p>
+						<p>available for you</p>
+						<button class="btn" data-toggle="modal" data-target="#myModal"
+							data-item="rudrakhyo">Buy Now</button>
+					</div>
+				</div>
+				<div class="col-sm-2">
+					<div class="thumbnail">
+						<img src="img/stones_0006_cats-eye-2.jpg.jpg" alt="San Francisco"
+							width="400" height="300">
+						<p>2019</p>
+						<p>
+							<strong>Rudrakhyo</strong>
+						</p>
+						<p>available for you</p>
+						<button class="btn" data-toggle="modal" data-target="#myModal"
+							data-item="catseye">Buy Now</button>
+					</div>
+				</div>
+				<div class="col-sm-2">
+					<div class="thumbnail">
+						<img src="img/stones_0004_black-cats-eye.jpg" alt="San Francisco"
+							width="400" height="300">
+						<p>2019</p>
+						<p>
+							<strong>Rudrakhyo</strong>
+						</p>
+						<p>available for you</p>
+						<button class="btn" data-toggle="modal" data-target="#myModal"
+							data-item="blackcatseye">Buy Now</button>
+					</div>
+				</div>
+				<div class="col-sm-2">
+					<div class="thumbnail">
+						<img src="img/stones_0000_mukta-ring.jpg" alt="San Francisco"
+							width="400" height="300">
+						<p>2019</p>
+						<p>
+							<strong>Rudrakhyo</strong>
+						</p>
+						<p>available for you</p>
+						<button class="btn" data-toggle="modal" data-target="#myModal"
+							data-item="mukta">Buy Now</button>
+					</div>
+				</div>
+				<div class="col-sm-2">
+					<div class="thumbnail">
+						<img src="img/stones_0016_pannya.jpg" alt="San Francisco"
+							width="400" height="300">
+						<p>2019</p>
+						<p>
+							<strong>Rudrakhyo</strong>
+						</p>
+						<p>available for you</p>
+						<button class="btn" data-toggle="modal" data-target="#myModal"
+							data-item="pannya">Buy Now</button>
+					</div>
+				</div>
+				<div class="col-sm-2">
+					<div class="thumbnail">
+						<img src="img/stones_0018_Rudrakhyo.jpg" alt="San Francisco"
+							width="400" height="300">
+						<p>2019</p>
+						<p>
+							<strong>Rudrakhyo</strong>
+						</p>
+						<p>available for you</p>
+						<button class="btn" data-toggle="modal" data-target="#myModal"
+							data-item="rudrakhyo">Buy Now</button>
+					</div>
+				</div>
+				<div class="col-sm-2">
+					<div class="thumbnail">
+						<img src="img/stones_0006_cats-eye-2.jpg.jpg" alt="San Francisco"
+							width="400" height="300">
+						<p>2019</p>
+						<p>
+							<strong>Rudrakhyo</strong>
+						</p>
+						<p>available for you</p>
+						<button class="btn" data-toggle="modal" data-target="#myModal"
+							data-item="catseye">Buy Now</button>
+					</div>
+				</div>
+				<div class="col-sm-2">
+					<div class="thumbnail">
+						<img src="img/stones_0004_black-cats-eye.jpg" alt="San Francisco"
+							width="400" height="300">
+						<p>2019</p>
+						<p>
+							<strong>Rudrakhyo</strong>
+						</p>
+						<p>available for you</p>
+						<button class="btn" data-toggle="modal" data-target="#myModal"
+							data-item="blackcatseye">Buy Now</button>
+					</div>
+				</div>
+				<div class="col-sm-2">
+					<div class="thumbnail">
+						<img src="img/stones_0000_mukta-ring.jpg" alt="San Francisco"
+							width="400" height="300">
+						<p>2019</p>
+						<p>
+							<strong>Rudrakhyo</strong>
+						</p>
+						<p>available for you</p>
+						<button class="btn" data-toggle="modal" data-target="#myModal"
+							data-item="mukta">Buy Now</button>
+					</div>
+				</div>
+				<div class="col-sm-2">
+					<div class="thumbnail">
+						<img src="img/stones_0016_pannya.jpg" alt="San Francisco"
+							width="400" height="300">
+						<p>2019</p>
+						<p>
+							<strong>Rudrakhyo</strong>
+						</p>
+						<p>available for you</p>
+						<button class="btn" data-toggle="modal" data-target="#myModal"
+							data-item="pannya">Buy Now</button>
+					</div>
+				</div>
+			</div>
+		</div>
+
+
+
+		<!-- Modal -->
+		<div class="modal fade" id="myModal" role="dialog">
+			<div class="modal-dialog">
+
+				<!-- Modal content-->
+				<div class="modal-content">
+					<div class="modal-header">
+						<button type="button" class="close" data-dismiss="modal">×</button>
+						<h4>
+							<span class="glyphicon glyphicon-lock"></span> Product
+						</h4>
+					</div>
+					<div class="modal-body">
+						<form role="form" class="form" action="#" method="post"
+							th:action="@{/buy}" th:object="${payment}">
+							<div class="form-group">
+								<label for="product"><span
+									class="glyphicon glyphicon-shopping-cart"></span> Product</label> <input
+									type="text" class="form-control" id="product" th:field="*{description}"
+									placeholder="What?">
+							</div>
+							<div class="form-group">
+								<label for="psw"><span
+									class="glyphicon glyphicon-shopping-cart"></span> Cart</label> <input
+									type="number" class="form-control" id="psw" th:field="*{noOfItems}"
+									placeholder="How many?">
+							</div>
+							<div class="form-group">
+								<label for="usrname"><span
+									class="glyphicon glyphicon-user"></span> Send To</label> <input
+									type="text" class="form-control" id="usrname" th:field="*{email}"
+									placeholder="Enter email">
+							</div>
+							<button type="submit" class="btn btn-block">
+								Pay <span class="glyphicon glyphicon-ok"></span>
+							</button>
+						</form>
+					</div>
+					<div class="modal-footer">
+						<button type="submit" class="btn btn-danger btn-default pull-left"
+							data-dismiss="modal">
+							<span class="glyphicon glyphicon-remove"></span> Cancel
+						</button>
+						<p>
+							Need <a href="#">help?</a>
+						</p>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+
+	<script type="text/javascript">
+		$('#productDiv .btn').on('click', function(e) {
+			console.log($(this).data('item'));
+			$("input[id*='product']").val($(this).data('item'));
+			return true;
+		});
+	</script>
+	<!-- Container (Contact Section) -->
+	<div id="contact" class="container">
+		<h3 class="text-center">Contact</h3>
+		<p class="text-center">
+			<em>We love our fans!</em>
+		</p>
+
+		<div class="row">
+			<div class="col-md-4">
+				<p>Interested? Drop a note.</p>
+				<p>
+					<span class="glyphicon glyphicon-map-marker"></span>Kolkata, WB,
+					India
+				</p>
+				<p>
+					<span class="glyphicon glyphicon-phone"></span>Phone: +00
+					1515151515
+				</p>
+				<p>
+					<span class="glyphicon glyphicon-envelope"></span>Email:
+					mail@mail.com
+				</p>
+			</div>
+			<div class="col-md-8">
+				<div class="row">
+					<div class="col-sm-6 form-group">
+						<input class="form-control" id="name" name="name"
+							placeholder="Name" type="text" required>
+					</div>
+					<div class="col-sm-6 form-group">
+						<input class="form-control" id="email" name="email"
+							placeholder="Email" type="email" required>
+					</div>
+				</div>
+				<textarea class="form-control" id="comments" name="comments"
+					placeholder="Comment" rows="5"></textarea>
+				<br>
+				<div class="row">
+					<div class="col-md-12 form-group">
+						<button class="btn pull-right" type="submit">Send</button>
+					</div>
+				</div>
+			</div>
+		</div>
+		<br>
+		<h3 class="text-center" id="Feedback">Feedback From VIP's/Fans</h3>
+		<ul class="nav nav-tabs">
+			<li class="active"><a data-toggle="tab" href="#home">CM</a></li>
+			<li><a data-toggle="tab" href="#menu1">s.khan</a></li>
+			<li><a data-toggle="tab" href="#menu2">Shourav</a></li>
+		</ul>
+
+		<div class="tab-content">
+			<div id="home" class="tab-pane fade in active">
+				<h2>M, Banerjee</h2>
+				<p>Looking forward to see you more.</p>
+			</div>
+			<div id="menu1" class="tab-pane fade">
+				<h2>Chandler Bing, Guitarist</h2>
+				<p>Always a pleasure people! We are pleased?</p>
+			</div>
+			<div id="menu2" class="tab-pane fade">
+				<h2>Ganguli</h2>
+				<p>Nice to listen from you</p>
+			</div>
+		</div>
+	</div>
+
+	<!-- Image of location/map -->
+	<img src="img/astrology-images-001.png" class="img-responsive"
+		style="width: 100%">
+
+	<!-- Footer -->
+	<footer class="text-center">
+		<a class="up-arrow" href="#myPage" data-toggle="tooltip"
+			title="TO TOP"> <span class="glyphicon glyphicon-chevron-up"></span>
+		</a><br> <br>
+		<p>
+			All right reserved by person name<a href="https://www.w3schools.com"
+				data-toggle="tooltip" title="Visit w3schools"></a>
+		</p>
+	</footer>
+
+	<script>
+		$(document).ready(
+				function() {
+					// Initialize Tooltip
+					$('[data-toggle="tooltip"]').tooltip();
+
+					// Add smooth scrolling to all links in navbar + footer link
+					$(".navbar a, footer a[href='#myPage']").on('click',
+							function(event) {
+
+								// Make sure this.hash has a value before overriding default behavior
+								if (this.hash !== "") {
+
+									// Prevent default anchor click behavior
+									event.preventDefault();
+
+									// Store hash
+									var hash = this.hash;
+
+									// Using jQuery's animate() method to add smooth page scroll
+									// The optional number (900) specifies the number of milliseconds it takes to scroll to the specified area
+									$('html, body').animate({
+										scrollTop : $(hash).offset().top
+									}, 900, function() {
+
+										// Add hash (#) to URL when done scrolling (default click behavior)
+										window.location.hash = hash;
+									});
+								} // End if
+							});
+				});
+	</script>
+
+</body>
+</html>

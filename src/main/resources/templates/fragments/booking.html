@@ -1,0 +1,438 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+	xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+<head>
+<meta charset="utf-8">
+<title>Insert title here</title>
+<link href="../../static/css/default.css" th:href="@{/css/default.css}" rel="stylesheet"
+	media="screen" />
+<link
+	href="http://cdn.jsdelivr.net/webjars/bootstrap/3.4.0/css/bootstrap.min.css"
+	th:href="@{/webjars/bootstrap/3.4.0/css/bootstrap.min.css}" rel="stylesheet"
+	media="screen" />
+
+<link href="https://use.fontawesome.com/releases/v5.8.1/css/brands.css"
+	th:href="@{/webjars/font-awesome/5.8.1/css/brands.min.css}" rel="stylesheet"
+	media="screen">
+<link href="https://use.fontawesome.com/releases/v5.8.1/css/fontawesome.css"
+	th:href="@{/webjars/font-awesome/5.8.1/css/fontawesome.min.css}"
+	rel="stylesheet" media="screen"
+	integrity="sha384-vd1e11sR28tEK9YANUtpIOdjGW14pS87bUBuOIoBILVWLFnS+MCX9T6MMf0VdPGq"
+	crossorigin="anonymous">
+
+
+<!-- <link rel="stylesheet"
+	href="https://use.fontawesome.com/releases/v5.8.1/css/brands.css"
+	integrity="sha384-n9+6/aSqa9lBidZMRCQHTHKJscPq6NW4pCQBiMmHdUCvPN8ZOg2zJJTkC7WIezWv"
+	crossorigin="anonymous">
+<link rel="stylesheet"
+	href="https://use.fontawesome.com/releases/v5.8.1/css/fontawesome.css"
+	integrity="sha384-vd1e11sR28tEK9YANUtpIOdjGW14pS87bUBuOIoBILVWLFnS+MCX9T6MMf0VdPGq"
+	crossorigin="anonymous"> -->
+
+<!-- <link
+	href="http://cdn.jsdelivr.net/webjars/bootstrap-datetimepicker/2.4.2/css/bootstrap-datetimepicker.min.css"
+	th:href="@{/webjars/bootstrap-datetimepicker/2.4.2/css/bootstrap-datetimepicker.min.css}"
+	rel="stylesheet" media="screen" /> -->
+<!-- <link
+	href="https://cdnjs.cloudflare.com/ajax/libs/eonasdan-bootstrap-datetimepicker/4.17.47/css/bootstrap-datetimepicker.min.css"
+	th:href="@{/webjars/Eonasdan-bootstrap-datetimepicker/4.17.47/css/bootstrap-datetimepicker.min.css}"
+	rel="stylesheet" media="screen" /> -->
+<link href="../../static/css/tempusdominus-bootstrap-3.min.css" th:href="@{/css/default.css}" rel="stylesheet"
+	media="screen" />
+<style>
+body {
+	font: 400 15px/1.8 Lato, sans-serif;
+	color: #777;
+}
+
+h3, h4 {
+	margin: 10px 0 30px 0;
+	letter-spacing: 10px;
+	font-size: 20px;
+	color: #111;
+}
+
+.container {
+	padding-top: 60px;
+	padding-right: 60px;
+	padding-left: 60px;
+	padding-bottom: 60px;
+}
+
+.person {
+	border: 10px solid transparent;
+	margin-bottom: 25px;
+	/*    width: 80%;
+    height: 80%;*/
+	opacity: 0.7;
+}
+
+.person:hover {
+	border-color: #999;
+}
+
+.carousel-inner img {
+	-webkit-filter: grayscale(70%);
+	filter: grayscale(70%); /* make all photos black and white */
+	width: 100%; /* Set width to 100% */
+	margin: auto;
+}
+
+.carousel-caption h3 {
+	color: #fff !important;
+}
+
+@media ( max-width : 600px) {
+	.carousel-caption {
+		display: none;
+		/* Hide the carousel text when the screen is less than 600 pixels wide */
+	}
+}
+
+.bg-1 {
+	background: #2d2d30;
+	color: #bdbdbd;
+}
+
+.bg-1 h3 {
+	color: #fff;
+}
+
+.bg-1 p {
+	font-style: italic;
+}
+
+.list-group-item:first-child {
+	border-top-right-radius: 0;
+	border-top-left-radius: 0;
+}
+
+.list-group-item:last-child {
+	border-bottom-right-radius: 0;
+	border-bottom-left-radius: 0;
+}
+
+.thumbnail {
+	padding: 0 0 15px 0;
+	border: none;
+	border-radius: 0;
+}
+
+.thumbnail p {
+	margin-top: 15px;
+	color: #555;
+}
+
+.btn {
+	padding: 10px 20px;
+	background-color: #333;
+	color: #f1f1f1;
+	border-radius: 0;
+	transition: .2s;
+}
+
+.btn:hover, .btn:focus {
+	border: 1px solid #333;
+	background-color: #fff;
+	color: #000;
+}
+
+.modal-header, h4, .close {
+	background-color: #333;
+	color: #fff !important;
+	text-align: center;
+	font-size: 30px;
+}
+
+.modal-header, .modal-body {
+	padding: 40px 50px;
+}
+
+.nav-tabs li a {
+	color: #777;
+}
+
+#googleMap {
+	width: 100%;
+	height: 400px;
+	-webkit-filter: grayscale(100%);
+	filter: grayscale(100%);
+}
+
+.navbar {
+	font-family: Montserrat, sans-serif;
+	margin-bottom: 0;
+	background-color: #2d2d30;
+	border: 0;
+	font-size: 11px !important;
+	letter-spacing: 4px;
+	opacity: 0.9;
+}
+
+.navbar li a, .navbar .navbar-brand {
+	color: #d5d5d5 !important;
+}
+
+.navbar-nav li a:hover {
+	color: #fff !important;
+}
+
+.navbar-nav li.active a {
+	color: #fff !important;
+	background-color: #29292c !important;
+}
+
+.navbar-default .navbar-toggle {
+	border-color: transparent;
+}
+
+.open .dropdown-toggle {
+	color: #fff;
+	background-color: #555 !important;
+}
+
+.dropdown-menu li a {
+	color: #000 !important;
+}
+
+.dropdown-menu li a:hover {
+	background-color: red !important;
+}
+
+footer {
+	background-color: #2d2d30;
+	color: #f5f5f5;
+	padding: 32px;
+}
+
+footer a {
+	color: #f5f5f5;
+}
+
+footer a:hover {
+	color: #777;
+	text-decoration: none;
+}
+
+.form-control {
+	border-radius: 0;
+}
+
+textarea {
+	resize: none;
+}
+
+<!--
+.button2 {
+	border-radius: 4px;
+}
+
+-->
+.btn1 {
+	padding: 10px 20px;
+	background-color: #333;
+	color: #F00;
+	border-radius: 0;
+	transition: .2s;
+}
+
+.thumbnail1 {
+	padding: 0 0 15px 0;
+	border: none;
+	border-radius: 0;
+}
+
+#login .container #login-row #login-column #login-box {
+	margin-top: 120px;
+	max-width: 600px;
+	height: 320px;
+	border: 1px solid #9C9C9C;
+	background-color: #EAEAEA;
+}
+
+#login .container #login-row #login-column #login-box #login-form {
+	padding: 20px;
+}
+
+#login .container #login-row #login-column #login-box #login-form #register-link
+	{
+	margin-top: -85px;
+}
+
+#rashi .container #rashi-row #rashi-column #rashi-box {
+	margin-top: 120px;
+	max-width: 600px;
+	height: 320px;
+	border: 1px solid #9C9C9C;
+	background-color: #EAEAEA;
+}
+
+#rashi .container #rashi-row #rashi-column #rashi-box #rashi-form {
+	padding: 20px;
+}
+
+#rashi .container #rashi-row #rashi-column #rashi-box #rashi-form #register-link
+	{
+	margin-top: -85px;
+}
+
+.icon-bar {
+	position: fixed;
+	top: 50%;
+	-webkit-transform: translateY(-50%);
+	-ms-transform: translateY(-50%);
+	transform: translateY(-50%);
+}
+
+.icon-bar a {
+	display: block;
+	text-align: center;
+	padding: 16px;
+	transition: all 0.3s ease;
+	color: white;
+	font-size: 20px;
+}
+
+.icon-bar a:hover {
+	background-color: #000;
+}
+
+.facebook {
+	background: #3B5998;
+	color: white;
+}
+
+.twitter {
+	background: #55ACEE;
+	color: white;
+}
+
+.google {
+	background: #dd4b39;
+	color: white;
+}
+
+.linkedin {
+	background: #007bb5;
+	color: white;
+}
+
+.youtube {
+	background: #bb0000;
+	color: white;
+}
+</style>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"
+	th:src="@{/webjars/jquery/3.3.1/jquery.min.js}"></script>
+
+<script
+	src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.24.0/moment.min.js"
+	th:src="@{/webjars/momentjs/2.24.0/min/moment.min.js}"></script>
+<!-- <script
+	src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.4.0/js/npm.js"
+	th:src="@{/webjars/bootstrap/3.4.0/js/collapse.js}"></script>
+<script
+	src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.4.0/js/npm.js"
+	th:src="@{/webjars/bootstrap/3.4.0/js/transition.js}"></script> -->
+<script
+	src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/js/bootstrap.min.js"
+	th:src="@{/webjars/bootstrap/3.4.0/js/bootstrap.min.js}"></script>
+<script
+	src="https://cdnjs.cloudflare.com/ajax/libs/jquery.form/4.2.2/jquery.form.min.js"
+	integrity="sha384-FzT3vTVGXqf7wRfy8k4BiyzvbNfeYjK+frTVqZeNDFl8woCbF0CYG6g2fMEFFo/i"
+	crossorigin="anonymous"
+	th:src="@{/webjars/jquery-form/4.2.2/jquery.form.min.js}"></script>
+<!-- <script
+	src="https://maxcdn.bootstrapcdn.com/bootstrap-datetimepicker/2.4.2/js/bootstrap-datetimepicker.min.js"
+	th:src="@{/webjars/bootstrap-datetimepicker/2.4.2/js/bootstrap-datetimepicker.min.js}"></script> -->
+<!-- <script
+	src="https://cdnjs.cloudflare.com/ajax/libs/eonasdan-bootstrap-datetimepicker/4.17.47/js/bootstrap-datetimepicker.min.js"
+	th:src="@{/webjars/Eonasdan-bootstrap-datetimepicker/4.17.47/js/bootstrap-datetimepicker.min.js}"></script> -->
+<script type="text/javascript" src="../../static/js/tempusdominus-core.js"
+	th:src="@{/js/tempusdominus-core.js}"></script>
+<script type="text/javascript" src="../../static/js/tempusdominus-bootstrap-3.min.js"
+	th:src="@{/js/tempusdominus-bootstrap-3.min.js}"></script>
+<script type="text/javascript" src="../../static/js/functions.js"
+	th:src="@{/js/functions.js}"></script>
+</head>
+<body>
+	<a href="#" data-toggle="modal" data-target="#bookingModal"
+		data-bookingtype="free" data-bookingdesc="Free Booking">Toggle Modal</a>
+	<div class="modal fade" id="bookingModal" role="dialog"
+		th:fragment="book(booking)">
+		<div class="modal-dialog modal-lg">
+			<div class="modal-content">
+				<div class="modal-header">
+					<button type="button" class="close" data-dismiss="modal">&times;</button>
+					<h4 class="modal-title">Book</h4>
+				</div>
+				<div class="modal-body">
+					<!--<p>This is a large modal.</p>-->
+					<div id="login">
+						<h3 class="text-center text-white pt-5">Booking form</h3>
+						<div class="container">
+							<div class="row justify-content-center align-items-center">
+								<div class="col-md-6">
+									<div class="col-md-12">
+										<div sec:authorize="isAnonymous()">
+											<span>Please log in to book your time</span>
+										</div>
+										<form id="booking-form" class="form" action="#" method="post"
+											th:object="${booking}" th:action="@{/booking}">
+											<input type="hidden" th:field="*{bookingType}"
+												th:value="${bookingType}" name="bookingType" id="bookingType"/>
+											<input type="hidden" th:field="*{bookingDesc}"
+												th:value="${bookingDesc}" name="bookingDesc" id="bookingDesc" /> <input
+												type="hidden" th:field="*{allDayEvent}" th:value="${allDayEvent}"
+												name="allDayEvent" id="allDayEvent"/> <input type="hidden"
+												th:field="*{recurring}" th:value="${recurring}" name="recurring"
+												id="recurring"/>
+
+											<h3 class="text-center text-info">Book Time</h3>
+											<div class="form-group input-prepend date">
+												<label for="startTime" class="text-info">Start Time:</label>
+												<div class="input-group date" id="startdatetimepicker" data-target-input="nearest">
+													<input type="text" class="form-control datetimepicker-input"
+														th:field="*{startTime}" readonly data-target="#startdatetimepicker"/> <span
+														class="input-group-addon" data-target="#startdatetimepicker" data-toggle="datetimepicker"> <span
+														class="glyphicon glyphicon-calendar"></span>
+													</span>
+												</div>
+											</div>
+											<div class="form-group input-prepend date">
+												<label for="endTime" class="text-info">End Time:</label>
+												<div class="input-group date" id="enddatetimepicker">
+													<input type="text" class="form-control form_datetime" readonly
+														th:field="*{endTime}" id="endTime"/> <!-- <span class="input-group-addon">
+														<span class="glyphicon glyphicon-calendar"></span>
+													</span> -->
+												</div>
+											</div>
+											<div id="amountDiv" class="form-group" style="display: none">
+												<label for="amount" class="text-info">Amount:</label><input
+													type="text" class="form-control" readonly id="amount"
+													th:field="*{payment.amount}" />
+											</div>
+
+											<div class="form-group">
+												<input type="submit" name="submit" class="btn btn-info btn-md"
+													value="submit" th:disabled="*{disabled}">
+											</div>
+										</form>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+				<div class="modal-footer">
+					<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+				</div>
+			</div>
+		</div>
+	</div>
+
+
+</body>
+</html>
