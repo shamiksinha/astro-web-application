@@ -343,11 +343,6 @@
 </head>
 
 <body id="myPage" data-spy="scroll" data-target=".navbar" data-offset="50">
-	<audio autoplay loop>
-		<source src="audio/mahalakshmi-mantra.mp3" type="audio/mpeg">
-		Your browser does not support the audio tag.
-	</audio> 
-
     <nav class="navbar navbar-default navbar-fixed-top">
         <div class="container-fluid">
             <div class="navbar-header">
@@ -388,6 +383,10 @@
             href="https://www.youtube.com/channel/UCJRfCPlqirM00Bh04g-SJpQ" class="youtube"><i
                 class="fab fa-youtube"></i></a>
     </div>
+    <audio autoplay loop preload="metadata">
+        <source src="audio/mahalakshmi-mantra.mp3" th:src="@{/audio/mahalakshmi-mantra.mp3}" type="audio/mpeg">
+        Your browser does not support the audio tag.
+    </audio>
     <div class="container">
         <h2>Survive from Monetary Problem</h2>
         <div id="myCarousel" class="carousel slide" data-ride="carousel">
@@ -520,30 +519,33 @@
                                             <form id="regstr-form" class="form" action="#" method="post"
                                                 th:action="@{/register}" th:object="${user}">
                                                 <div class="form-group">
-                                                    <label for="firstname" class="text-info">First
+                                                    <label for="firstName" class="text-info">First
                                                         Name:</label><br> <input type="text" class="form-control"
                                                         th:field="*{firstName}">
                                                 </div>
                                                 <div class="form-group">
-                                                    <label for="lstname" class="text-info">Last Name:</label><br>
+                                                    <label for="lastName" class="text-info">Last Name:</label><br>
                                                     <input type="text" class="form-control" th:field="*{lastName}">
                                                 </div>
                                                 <div class="form-group">
-                                                    <label for="mobile" class="text-info">Mobile:</label><br>
+                                                    <label for="phone" class="text-info">Mobile:</label><br>
                                                     <input type="text" class="form-control" th:field="*{phone}">
                                                 </div>
                                                 <div class="form-group">
                                                     <label for="username" class="text-info">Username:</label><br>
-                                                    <input type="text" class="form-control" th:field="*{username}">
+                                                    <input type="text" class="form-control" id="registerusername"
+                                                        th:field="*{username}">
                                                 </div>
                                                 <div class="form-group">
                                                     <label for="password" class="text-info">Password:</label><br>
-                                                    <input type="text" class="form-control" th:field="*{password}">
+                                                    <input type="password" class="form-control" id="registerpassword"
+                                                        th:field="*{password}">
                                                 </div>
                                                 <div class="form-group">
                                                     <label for="password" class="text-info">Confirm
-                                                        Password:</label><br> <input type="text" class="form-control"
-                                                        th:field="*{confirmPassword}">
+                                                        Password:</label><br> <input type="password"
+                                                        class="form-control" th:field="*{confirmPassword}"
+                                                        id="confirmpassword">
                                                 </div>
                                                 <div id="login-link" class="text-right">
                                                     <a href="#" class="text-info" data-source="regstr-row"
