@@ -563,8 +563,17 @@
                 </span>
             </div>
             <button type="button" class="btn btn-info btn-sm button">PROFILE</button>
+            <div class="row">
+                <div align="right">
+                    <a href="javascript: document.logoutForm.submit()" role="menuitem"> Logout</a>
+                </div>                
+            </div>
         </div>
     </div>
+
+    <form name="logoutForm" th:action="@{/logout}" method="post" th:hidden="true">
+        <input hidden type="submit" value="Sign Out"/>
+     </form>
 
     <!-- Container (The current status Section) -->
 

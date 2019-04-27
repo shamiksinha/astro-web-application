@@ -17,6 +17,7 @@ import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.crypto.factory.PasswordEncoderFactories;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.authentication.AuthenticationSuccessHandler;
+import org.springframework.security.web.csrf.HttpSessionCsrfTokenRepository;
 
 import com.astrology.web.astroweb.services.EncryptionService;
 import com.astrology.web.astroweb.util.Env;
@@ -47,12 +48,15 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
 		.and()
 		.formLogin().loginPage("/index").successHandler(authenticationSuccessHandler)
 		.and()
-		.logout().permitAll();
+        .logout().logoutSuccessUrl("/index?logout").permitAll();
+        
+        httpSecurity.headers().frameOptions().disable();
+		httpSecurity.csrf().csrfTokenRepository(new HttpSessionCsrfTokenRepository());
 
 		if (Env.TEST.name().equals(env.getProperty("app.env"))) {
 			httpSecurity.authorizeRequests().antMatchers("/console/**").permitAll().anyRequest().authenticated();
 			httpSecurity.csrf().disable();
-			httpSecurity.headers().frameOptions().disable();
+			//httpSecurity.headers().frameOptions().disable();
 		}
 	}
 	
