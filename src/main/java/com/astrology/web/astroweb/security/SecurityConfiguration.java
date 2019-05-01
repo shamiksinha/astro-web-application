@@ -48,14 +48,15 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
 		.and()
 		.formLogin().loginPage("/index").successHandler(authenticationSuccessHandler)
 		.and()
-        .logout().logoutSuccessUrl("/index?logout").permitAll();
-        
+        .logout().logoutSuccessUrl("/index?logout").permitAll()
+        .and()
+        .csrf().disable().authorizeRequests().antMatchers("/paymentComplete**").permitAll().anyRequest().authenticated();
         httpSecurity.headers().frameOptions().disable();
 		httpSecurity.csrf().csrfTokenRepository(new HttpSessionCsrfTokenRepository());
 
 		if (Env.TEST.name().equals(env.getProperty("app.env"))) {
 			httpSecurity.authorizeRequests().antMatchers("/console/**").permitAll().anyRequest().authenticated();
-			httpSecurity.csrf().disable();
+			//httpSecurity.csrf().disable();
 			//httpSecurity.headers().frameOptions().disable();
 		}
 	}

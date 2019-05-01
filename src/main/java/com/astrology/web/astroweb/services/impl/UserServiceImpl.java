@@ -122,6 +122,7 @@ public class UserServiceImpl implements UserService {
 		User user = findByUsername(username);
 		List<Booking> bookingList = (List<Booking>) user.getBookings();
 		bookingList.add(booking);
+		user.getPaymentOrders().add(booking.getPaymentOrder());
 		user=userRepository.save(user);
 		return user;
 	}

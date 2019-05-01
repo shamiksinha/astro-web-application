@@ -1,15 +1,13 @@
 package com.astrology.web.astroweb.services.impl;
 
+import com.astrology.web.astroweb.services.EncryptionService;
+
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.jasypt.commons.CommonUtils;
 import org.jasypt.util.password.StrongPasswordEncryptor;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
-
-import com.astrology.web.astroweb.repositories.bootstrap.UserLoader;
-import com.astrology.web.astroweb.services.EncryptionService;
 
 @Service
 public class EncryptionServiceImpl implements EncryptionService {

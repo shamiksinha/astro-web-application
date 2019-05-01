@@ -5,6 +5,20 @@ import java.time.format.DateTimeFormatter;
 import java.util.List;
 import java.util.stream.Collectors;
 
+import javax.servlet.http.HttpServletRequest;
+
+import com.astrology.web.astroweb.model.Booking;
+import com.astrology.web.astroweb.model.Payment;
+import com.astrology.web.astroweb.model.User;
+import com.astrology.web.astroweb.services.BookingTypeService;
+import com.astrology.web.astroweb.services.UserService;
+import com.astrology.web.astroweb.util.CommonConstants;
+import com.instamojo.wrapper.api.Instamojo;
+import com.instamojo.wrapper.exception.ConnectionException;
+import com.instamojo.wrapper.exception.HTTPException;
+import com.instamojo.wrapper.model.PaymentOrder;
+import com.instamojo.wrapper.model.PaymentOrderResponse;
+
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -15,17 +29,6 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
-
-import com.astrology.web.astroweb.model.Booking;
-import com.astrology.web.astroweb.model.Payment;
-import com.astrology.web.astroweb.model.User;
-import com.astrology.web.astroweb.services.UserService;
-import com.astrology.web.astroweb.util.CommonConstants;
-import com.instamojo.wrapper.api.Instamojo;
-import com.instamojo.wrapper.exception.ConnectionException;
-import com.instamojo.wrapper.exception.HTTPException;
-import com.instamojo.wrapper.model.PaymentOrder;
-import com.instamojo.wrapper.model.PaymentOrderResponse;
 
 @Controller
 public class BookingController {
@@ -45,6 +48,17 @@ public class BookingController {
 		this.userservice = userservice;
 	}
 
+	private BookingTypeService bookingTypeService;
+
+	
+	/**
+	 * @param bookingTypeService the bookingTypeService to set
+	 */
+	@Autowired
+	public void setBookingTypeService(BookingTypeService bookingTypeService) {
+		this.bookingTypeService = bookingTypeService;
+	}
+
 	@GetMapping("/booking")
 	public String bookingPage(Model model, Authentication authentication) {
 		User user = new User();
@@ -61,7 +75,7 @@ public class BookingController {
 	}
 
 	@PostMapping("booking")
-	public String createBookings(Booking bookingModel, Authentication authentication) {
+	public String createBookings(Model model,Booking bookingModel, Authentication authentication, HttpServletRequest request) {
 
 		logger.info("In getBookings method with booking data value " + bookingModel);
 		/*
@@ -74,6 +88,8 @@ public class BookingController {
 		 * ().get("bookings")); }
 		 */
 		// if (method=="addBooking") {
+		String url = "paymentComplete";
+		String redirectUrlPrefix = request.getScheme() + "://" + request.getServerName() + ":" + request.getServerPort()+"/";
 		com.astrology.web.astroweb.domain.Booking booking = new com.astrology.web.astroweb.domain.Booking();
 		// Booking bookingModel=(Booking)
 		// model.asMap().get(CommonConstants.BOOKING_ATTRIBUTE);
@@ -84,6 +100,7 @@ public class BookingController {
 		booking.setEndTime(LocalDateTime.parse(bookingModel.getEndTime(), formatter));
 		booking.setRecurring(bookingModel.isRecurring());
 		booking.setStartTime(LocalDateTime.parse(bookingModel.getStartTime(), formatter));
+		booking.setBookingType(bookingTypeService.findByTypeDesc(bookingModel.getBookingType()));
 
 		/*
 		 * Random rand=new Random(); booking.setBookingId("FC_"+rand.nextInt()); while
@@ -95,48 +112,69 @@ public class BookingController {
 		if (myUser instanceof UserDetails) {
 			user = (User) myUser;
 		}
+
+		if (bookingModel.getBookingType().equals("paid")) {
+			// Save payment details in database
+			bookingModel.getPayment().setAmount(100d);
+			bookingModel.getPayment().setDescription(bookingModel.getBookingDesc());
+			com.astrology.web.astroweb.domain.PaymentOrder paymentOrder = new com.astrology.web.astroweb.domain.PaymentOrder();
+			Payment payment = bookingModel.getPayment();
+			paymentOrder.setName(payment.getName());
+			paymentOrder.setEmail(payment.getEmail());
+			paymentOrder.setPhone(payment.getPhone());
+			paymentOrder.setCurrencyCode(payment.getCurrencyCode());
+			paymentOrder.setAmount(payment.getAmount());
+			paymentOrder.setDescription(payment.getDescription());
+			paymentOrder.setTransactionId(payment.getTransactionId());
+			paymentOrder.setBooking(booking);
+			paymentOrder.setUser(userservice.findByUsername(user.getUsername()));
+			booking.setPaymentOrder(paymentOrder);
+		}
 		booking.setUser(userservice.findByUsername(user.getUsername()));
+		logger.info("Payment Order to be created " + booking.getPaymentOrder());
 		logger.info("Booking to be created " + booking);
 		logger.info("Booking to be created under user " + user);
 		com.astrology.web.astroweb.domain.User userDomain = userservice.saveBooking(booking, user.getUsername());
 		// }
-		String url = "home";
+
 		if (userDomain != null) {
 			if (bookingModel.getBookingType().equals("paid")) {
-				bookingModel.getPayment().setAmount(100d);
+				// bookingModel.getPayment().setAmount(100d);
 				Payment payment = bookingModel.getPayment();
-				userDomain = userservice.savePaymentOrder(payment);
-				if (user != null) {
-					PaymentOrder order = new PaymentOrder();
-					order.setName(payment.getName());
-					order.setEmail(payment.getEmail());
-					order.setPhone(payment.getPhone());
-					order.setCurrency(payment.getCurrencyCode());
-					order.setAmount(payment.getAmount());
-					order.setDescription(payment.getDescription());
-					order.setRedirectUrl("http://localhost:8080/paymentComplete");
-					// order.setWebhookUrl("http://localhost:8080/home");
-					order.setTransactionId(payment.getTransactionId());
+				// userDomain = userservice.savePaymentOrder(payment);
+				// if (user != null) {
+				PaymentOrder order = new PaymentOrder();
+				order.setName(payment.getName());
+				order.setEmail(payment.getEmail());
+				order.setPhone(payment.getPhone());
+				order.setCurrency(payment.getCurrencyCode());
+				order.setAmount(payment.getAmount());
+				order.setDescription(payment.getDescription());
+				order.setRedirectUrl(redirectUrlPrefix + url);
+				// order.setWebhookUrl("http://localhost:8080/home");
+				order.setTransactionId(payment.getTransactionId());
 
-					try {
-						PaymentOrderResponse paymentOrderResponse = instamojo.createPaymentOrder(order);
-						logger.info(paymentOrderResponse.getPaymentOrder().getStatus());
-						logger.info("PaymentOrderResponse " + paymentOrderResponse);
-						url = paymentOrderResponse.getPaymentOptions().getPaymentUrl();
-						logger.info("Redirect URL " + url);
+				try {
+					PaymentOrderResponse paymentOrderResponse = instamojo.createPaymentOrder(order);
+					logger.info(paymentOrderResponse.getPaymentOrder().getStatus());
+					logger.info("PaymentOrderResponse " + paymentOrderResponse);
+					url = paymentOrderResponse.getPaymentOptions().getPaymentUrl();
+					logger.info("Redirect URL " + url);
 
-					} catch (HTTPException e) {
-						logger.error(e.getStatusCode());
-						logger.error(e.getMessage());
-						logger.error(e.getJsonPayload());
+				} catch (HTTPException e) {
+					logger.error(e.getStatusCode());
+					logger.error(e.getMessage());
+					logger.error(e.getJsonPayload());
+					model.addAttribute("error",e.getStatusCode()+" "+e.getMessage());
 
-					} catch (ConnectionException e) {
-						logger.error(e.getMessage());
-					}
+				} catch (ConnectionException e) {
+					logger.error(e.getMessage());
+					model.addAttribute("error",e.getMessage());	
 				}
+				// }
 			}
 		}
-		return "redirect:"+url;
+		return "redirect:" + url;
 	}
 
 	@GetMapping("/edit")
@@ -166,9 +204,10 @@ public class BookingController {
 	}
 
 	@ModelAttribute(CommonConstants.BOOKING_ATTRIBUTE)
-	public Booking getBooking() {
+	public Booking getBooking(Authentication authentication) {
 		Booking booking = new Booking();
 		booking.setBookingDesc("Free Booking");
+		booking.setPayment(getPayment(authentication));
 		return booking;
 	}
 
