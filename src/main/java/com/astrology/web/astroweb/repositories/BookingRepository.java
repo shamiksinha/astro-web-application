@@ -11,7 +11,9 @@ import org.springframework.data.repository.PagingAndSortingRepository;
 
 public interface BookingRepository extends PagingAndSortingRepository <Booking, Integer> {
 	//Booking findBookingByBookingId(String bookingId);
-	Page<com.astrology.web.astroweb.model.Booking> findFirst100ByStartTimeAfter(LocalDateTime now,Pageable pageable);
+	Page<Booking> findFirst100ByStartTimeAfter(LocalDateTime now,Pageable pageable);
 
-	Page<com.astrology.web.astroweb.model.Booking> findByUserAndStartTimeAfter(User user,LocalDateTime now,Pageable pageable);
+	Page<Booking> findByUserAndStartTimeAfter(User user,LocalDateTime now,Pageable pageable);
+
+	Booking findByStartTime(LocalDateTime startTime);
 }

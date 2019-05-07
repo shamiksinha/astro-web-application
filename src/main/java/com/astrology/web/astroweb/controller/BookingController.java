@@ -10,6 +10,7 @@ import javax.servlet.http.HttpServletRequest;
 import com.astrology.web.astroweb.model.Booking;
 import com.astrology.web.astroweb.model.Payment;
 import com.astrology.web.astroweb.model.User;
+import com.astrology.web.astroweb.services.BookingService;
 import com.astrology.web.astroweb.services.BookingTypeService;
 import com.astrology.web.astroweb.services.UserService;
 import com.astrology.web.astroweb.util.CommonConstants;
@@ -29,6 +30,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 @Controller
 public class BookingController {
@@ -50,6 +52,8 @@ public class BookingController {
 
 	private BookingTypeService bookingTypeService;
 
+	private BookingService bookingService;
+
 	
 	/**
 	 * @param bookingTypeService the bookingTypeService to set
@@ -57,6 +61,14 @@ public class BookingController {
 	@Autowired
 	public void setBookingTypeService(BookingTypeService bookingTypeService) {
 		this.bookingTypeService = bookingTypeService;
+	}
+
+	/**
+	 * @param bookingService the bookingService to set
+	 */
+	@Autowired
+	public void setBookingService(BookingService bookingService) {
+		this.bookingService = bookingService;
 	}
 
 	@GetMapping("/booking")
@@ -75,7 +87,7 @@ public class BookingController {
 	}
 
 	@PostMapping("booking")
-	public String createBookings(Model model,Booking bookingModel, Authentication authentication, HttpServletRequest request) {
+	public String createBookings(Model model,Booking bookingModel, Authentication authentication, HttpServletRequest request,RedirectAttributes rdAttributes) {
 
 		logger.info("In getBookings method with booking data value " + bookingModel);
 		/*
@@ -112,7 +124,7 @@ public class BookingController {
 		if (myUser instanceof UserDetails) {
 			user = (User) myUser;
 		}
-
+		boolean existingBookings=false;
 		if (bookingModel.getBookingType().equals("paid")) {
 			// Save payment details in database
 			bookingModel.getPayment().setAmount(100d);
@@ -129,12 +141,29 @@ public class BookingController {
 			paymentOrder.setBooking(booking);
 			paymentOrder.setUser(userservice.findByUsername(user.getUsername()));
 			booking.setPaymentOrder(paymentOrder);
+		}else{
+			if (bookingService.findByStartTime(booking.getStartTime()) == null){
+			url="userconfirmation";
+			rdAttributes.addAttribute("msg","Successfully Booked");
+			rdAttributes.addAttribute("paymentStatus","null");
+			rdAttributes.addAttribute("status", true);
+			}else{
+				existingBookings=true;
+				url="userconfirmation";
+				rdAttributes.addAttribute("msg","Slot already booked. Please retry for a different one");
+				rdAttributes.addAttribute("paymentStatus","null");
+				rdAttributes.addAttribute("status", false);
+			}
 		}
 		booking.setUser(userservice.findByUsername(user.getUsername()));
 		logger.info("Payment Order to be created " + booking.getPaymentOrder());
 		logger.info("Booking to be created " + booking);
 		logger.info("Booking to be created under user " + user);
-		com.astrology.web.astroweb.domain.User userDomain = userservice.saveBooking(booking, user.getUsername());
+		com.astrology.web.astroweb.domain.User userDomain=null;
+		if (!existingBookings){
+			userDomain = userservice.saveBooking(booking, user.getUsername());
+		}
+		
 		// }
 
 		if (userDomain != null) {

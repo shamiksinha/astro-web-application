@@ -25,7 +25,10 @@ public class User implements UserDetails {
 	 */
 	private static final long serialVersionUID = 6578721060265951297L;
 
+	@ToString.Exclude
 	private String password;
+
+	@ToString.Exclude
 	@Transient
 	private String confirmPassword;
 	private String username;

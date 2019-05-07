@@ -23,4 +23,5 @@ public class Booking {
 	private boolean recurring;
 	private boolean disabled;
 	private Payment payment;
+	private User user;
 }

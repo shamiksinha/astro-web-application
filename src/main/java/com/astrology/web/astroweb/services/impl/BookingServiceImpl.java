@@ -4,9 +4,12 @@ import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.transaction.Transactional;
+
 import com.astrology.web.astroweb.domain.Booking;
 import com.astrology.web.astroweb.domain.User;
 import com.astrology.web.astroweb.repositories.BookingRepository;
+import com.astrology.web.astroweb.repositories.converters.BookingConverter;
 import com.astrology.web.astroweb.services.BookingService;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -19,6 +22,16 @@ import org.springframework.stereotype.Service;
 @Service("bookingService")
 @Profile("springdatajpa")
 public class BookingServiceImpl implements BookingService {
+
+	private BookingConverter bookingConverter;
+
+	/**
+	 * @param bookingConverter the bookingConverter to set
+	 */
+	@Autowired
+	public void setBookingConverter(BookingConverter bookingConverter) {
+		this.bookingConverter = bookingConverter;
+	}
 
 	private BookingRepository bookingRepository;
 
@@ -49,14 +62,21 @@ public class BookingServiceImpl implements BookingService {
 		bookingRepository.deleteById(id);
 	}
 
+	@Transactional
 	@Override
 	public Page<com.astrology.web.astroweb.model.Booking> findFutureBookings(int page,int size) {
-		return bookingRepository.findFirst100ByStartTimeAfter(LocalDateTime.now(), PageRequest.of(page, size, Sort.Direction.ASC, "startTime"));
+		return bookingConverter.convert(bookingRepository.findFirst100ByStartTimeAfter(LocalDateTime.now(), PageRequest.of(page, size, Sort.Direction.ASC, "startTime")));
+	}
+
+	@Transactional
+	@Override
+	public Page<com.astrology.web.astroweb.model.Booking> findFutureBookingsForUser(int page, int size, User user) {
+		return bookingConverter.convert(bookingRepository.findByUserAndStartTimeAfter(user, LocalDateTime.now(), PageRequest.of(page, size, Sort.Direction.ASC, "startTime")));
 	}
 
 	@Override
-	public Page<com.astrology.web.astroweb.model.Booking> findFutureBookingsForUser(int page, int size, User user) {
-		return bookingRepository.findByUserAndStartTimeAfter(user, LocalDateTime.now(), PageRequest.of(page, size, Sort.Direction.ASC, "startTime"));
+	public Booking findByStartTime(LocalDateTime startTime) {
+		return bookingRepository.findByStartTime(startTime);
 	}
 
 	/*@Override

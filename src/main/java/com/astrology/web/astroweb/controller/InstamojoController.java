@@ -74,19 +74,19 @@ public class InstamojoController {
 		}
 		rdAttributes.addAttribute("msg",model.asMap().get("msg"));
 		rdAttributes.addAttribute("paymentStatus",model.asMap().get("paymentStatus"));
-		rdAttributes.addAttribute("success", isSuccess);
+		rdAttributes.addAttribute("status", isSuccess);
 		return url;
 	}
 
 	@GetMapping("/userconfirmation")
-	public String getUserConfirmation(Model model,@RequestParam("msg") String msg,@RequestParam("success") boolean isSuccess,@RequestParam("paymentStatus") String paymentStatus){
+	public String getUserConfirmation(Model model,@RequestParam("msg") String msg,@RequestParam("status") boolean isSuccess,@RequestParam("paymentStatus") String paymentStatus){
 		logger.info("Inside getUserConfirmation");
 		if (isSuccess){
 			model.addAttribute("success", msg);
 		}else{
 			model.addAttribute("error", msg);
 		}
-		model.addAttribute("paymentStatus", paymentStatus);
+		model.addAttribute("paymentStatus", paymentStatus=="null"?null:paymentStatus);
 		return "userconfirmation";
 	}
 

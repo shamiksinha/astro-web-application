@@ -440,20 +440,27 @@
         <input hidden type="submit" value="Sign Out" />
     </form>
 
-    <div th:if="${param.success}">
+    <div class="container" th:if="${success}">
         <div class="panel panel-success">
             <div class="panel-heading">
                 <h3 class="panel-title">Success</h3>
             </div>
             <div class="panel-body">
-                Successfully completed the transaction.
+                <span th:text="${success}">Successfully completed the transaction.</span>
                 <span th:if="${paymentStatus}">Payment was successful</span>
             </div>
         </div>
     </div>
 
-    <div th:if="${param.error}">        
-        <span class="label label-danger">Error in transaction</span>        
+    <div class="container" th:if="${error}">
+        <div class="panel panel-danger">
+            <div class="panel-heading">
+                <h3 class="panel-title">Error Ocurred</h3>
+            </div>
+            <div class="panel-body">
+                <span th:text="${error}">Error in transaction</span>
+            </div>
+        </div>
     </div>
 
     <!-- Container (Contact Section) -->

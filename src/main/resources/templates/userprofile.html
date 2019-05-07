@@ -428,7 +428,7 @@
                     <span sec:authentication="principal.lastName"></span>
                 </span>
             </div>
-            <button type="button" class="btn btn-info btn-sm button">PROFILE</button>
+            <!-- <button type="button" class="btn btn-info btn-sm button">PROFILE</button> -->
             <div class="row">
                 <div align="right">
                     <a href="javascript: document.logoutForm.submit()" role="menuitem"> Logout</a>
@@ -440,9 +440,9 @@
     <form name="logoutForm" th:action="@{/logout}" method="post" th:hidden="true">
         <input hidden type="submit" value="Sign Out"/>
      </form>
-    <div th:if="${page.totalPages>0}">
+    <!-- <div th:if="${page.totalPages>0}"> -->
         <div th:replace="fragments/pagination.html ::paginationbar"></div>
-    </div>
+    <!-- </div> -->
 
     <!-- Container (Contact Section) -->
     <div id="contact" class="container">

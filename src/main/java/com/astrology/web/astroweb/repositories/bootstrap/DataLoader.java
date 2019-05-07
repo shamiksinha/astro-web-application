@@ -61,10 +61,10 @@ public class DataLoader implements ApplicationListener<ContextRefreshedEvent> {
 	@Override
 	public void onApplicationEvent(ContextRefreshedEvent event) {
 		log.info("Context refreshed. Reached UserLoader");		
-		if (Env.TEST.name().equals(env.getProperty("app.env"))) {
-			if (userService.count()!=0) {
+		if (Env.TEST.name().equals(env.getProperty("app.env")) && userService.count()==0) {
+			/* if (userService.count()==0) {
 				userService.deleteAll();
-			}
+			} */
 			User user1=new User();
 			user1.setFirstName("Shamik");
 			user1.setLastName("Sinha");
